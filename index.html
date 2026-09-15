@@ -5,9 +5,6 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 <meta name="theme-color" content="#161616" />
 <title>거지탈출 프로젝트 💸</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>:root{
   --ink:#151515;
   --paper:#f5f2e9;
@@ -22,7 +19,7 @@
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:"IBM Plex Sans KR",system-ui,sans-serif}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:system-ui,"Apple SD Gothic Neo","Malgun Gothic",sans-serif}
 button,input,select{font:inherit;color:inherit}
 button{cursor:pointer}
 .hidden{display:none!important}
@@ -45,7 +42,7 @@ input:focus,select:focus{box-shadow:3px 3px 0 var(--ink)}
 .month-bar{display:grid;grid-template-columns:44px 1fr 44px;align-items:center;gap:12px;margin:0 auto 24px;max-width:650px}.month-title-wrap{text-align:center}.month-title{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;letter-spacing:-.04em;margin-bottom:5px}
 .hero-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:34px}.hero-card{min-height:132px;background:var(--card);border:var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px;display:flex;flex-direction:column;justify-content:space-between}.hero-card:nth-child(2){background:#fff0f6}.hero-card:nth-child(3){background:#edf8ff}.hero-card:nth-child(4){background:#fff7cf}.total-card{background:var(--lime)}.card-label{font-size:.82rem;font-weight:700}.hero-card strong{font-size:clamp(1.55rem,3vw,2.4rem);letter-spacing:-.05em}.hero-card small{color:#61615b}
 .section-block{margin:42px 0}.section-heading{display:flex;justify-content:space-between;gap:18px;align-items:end;margin-bottom:16px}.section-heading h2{font-size:1.7rem;margin:3px 0 0;letter-spacing:-.035em}.section-heading p{margin:0;font-size:.86rem}
-.member-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.member-card{position:relative;background:var(--card);border:var(--line);border-radius:var(--radius);padding:18px;overflow:hidden}.member-card.king{box-shadow:var(--shadow)}.member-card.king:after{content:"SAVE KING";position:absolute;right:-28px;top:15px;background:var(--yellow);border:2px solid var(--ink);padding:5px 28px;transform:rotate(35deg);font-size:.68rem;font-weight:700}.member-head{display:flex;align-items:center;gap:10px;margin-bottom:18px}.member-emoji{width:42px;height:42px;border:var(--line);border-radius:50%;display:grid;place-items:center;background:white;font-size:1.35rem}.member-name{font-weight:700;font-size:1.1rem}.member-total{font-size:2rem;font-weight:700;letter-spacing:-.05em;margin-bottom:12px}.member-split{display:grid;grid-template-columns:1fr 1fr;gap:8px}.member-split div{padding:9px;border:1.5px dashed var(--ink);border-radius:10px;font-size:.78rem}.member-split strong{display:block;font-size:.95rem;margin-top:3px}
+.member-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.member-card{position:relative;background:var(--card);border:var(--line);border-radius:var(--radius);padding:18px;overflow:hidden}.member-card.king{box-shadow:var(--shadow)}.member-card.king:after{content:"SAVE KING";position:absolute;right:-28px;top:15px;background:var(--yellow);border:2px solid var(--ink);padding:5px 28px;transform:rotate(35deg);font-size:.68rem;font-weight:700}.member-head{display:flex;align-items:center;gap:10px;margin-bottom:16px}.member-emoji{width:42px;height:42px;border:var(--line);border-radius:50%;display:grid;place-items:center;background:white;font-size:1.35rem}.member-name{font-weight:700;font-size:1.1rem}.member-total-label{font-size:.7rem;color:var(--muted);font-weight:700;margin-bottom:3px}.member-total{font-size:2rem;font-weight:700;letter-spacing:-.05em;margin-bottom:12px}.member-split{display:grid;grid-template-columns:1fr 1fr;gap:8px}.member-split div{padding:9px;border:1.5px dashed var(--ink);border-radius:10px;font-size:.78rem}.member-split strong{display:block;font-size:.95rem;margin-top:3px}.member-average{margin-top:8px;padding:10px 11px;border:1.5px dashed var(--ink);border-radius:10px;display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:.78rem}.member-average strong{font-size:1rem}
 .calendar-card{background:var(--card);border:var(--line);border-radius:22px;box-shadow:var(--shadow);overflow:hidden}.weekday-row,.calendar-grid{display:grid;grid-template-columns:repeat(7,1fr)}.weekday-row{border-bottom:var(--line);background:#fff}.weekday-row span{text-align:center;font-size:.77rem;font-weight:700;padding:10px 4px}.sat{color:#2479bd}.sun{color:#d84e4e}.calendar-grid{background:var(--ink);gap:2px}.calendar-day{min-height:120px;background:var(--card);border:0;padding:9px;text-align:left;display:flex;flex-direction:column;gap:7px}.calendar-day.other-month{background:#e9e5dc;color:#aaa}.calendar-day.today .day-num{background:var(--lime);border:1.5px solid var(--ink);border-radius:50%;width:28px;height:28px;display:grid;place-items:center}.day-num{font-size:.8rem;font-weight:700}.day-total{margin-top:auto;font-size:.82rem;font-weight:700}.day-pills{display:flex;flex-wrap:wrap;gap:4px}.day-pill{font-size:.63rem;padding:3px 5px;border:1px solid #bbb;border-radius:999px;background:white;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.calendar-day.has-entry:hover{background:#f7ffd9}
 .recent-list{display:grid;gap:9px}.recent-item{display:grid;grid-template-columns:90px 1fr auto;gap:14px;align-items:center;background:var(--card);border:var(--line);border-radius:14px;padding:12px 14px}.recent-date{font-size:.78rem;color:#777}.recent-main strong{display:block}.recent-main span{font-size:.78rem;color:#777}.recent-amount{font-weight:700;white-space:nowrap}
 .empty{border:2px dashed #aaa;border-radius:14px;padding:24px;text-align:center;color:#777;background:rgba(255,255,255,.45)}
@@ -59,6 +56,20 @@ footer{text-align:center;color:#777;font-size:.78rem;padding-top:20px}
 .auth-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:2px}.auth-message{min-height:20px;margin:10px 0 0!important;font-size:.8rem;font-weight:700}.auth-note{margin:14px 0 0!important;padding:11px 12px;border:1.5px dashed var(--ink);border-radius:12px;background:#fff8cf;font-size:.76rem;line-height:1.6}.sync-pill{display:inline-flex;align-items:center;gap:6px;border:var(--line);background:#fff;border-radius:999px;padding:8px 11px;font-size:.74rem;font-weight:700}.sync-dot{width:8px;height:8px;border-radius:50%;background:#f0a83b;display:inline-block}.sync-dot.ok{background:#51b85b}.sync-dot.err{background:#df4e4e}.account-email{font-size:.7rem;color:#777;max-width:190px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;align-self:center}.auth-secondary{background:#fff;padding:12px 16px;border:var(--line);font-weight:700;border-radius:12px}.auth-secondary:hover{transform:translate(-1px,-1px);box-shadow:3px 3px 0 var(--ink)}
 @media(max-width:600px){.auth-actions{grid-template-columns:1fr}.sync-pill{margin-top:10px}.account-email{max-width:100%}}
 .auth-actions.single{grid-template-columns:1fr}
+
+/* ===== compact typography + admin layout controls ===== */
+html{font-size:14px}
+body{font-size:.92rem}
+.auth-card h1{font-size:clamp(2rem,7vw,3rem)}
+.topbar{margin-bottom:24px}.topbar h1{font-size:clamp(1.45rem,3vw,2.15rem)}.subtitle{font-size:.82rem;margin-top:6px}.month-title{font-size:clamp(1.2rem,2vw,1.5rem)}
+.hero-grid{gap:10px;margin-bottom:24px}.hero-card{min-height:88px;padding:11px 13px;border-radius:15px;box-shadow:3px 3px 0 var(--ink)}.card-label{font-size:.66rem}.hero-card strong{font-size:clamp(.88rem,1.6vw,1.12rem);line-height:1.2;letter-spacing:-.035em}.hero-card small{font-size:.63rem;line-height:1.35}
+.section-block{margin:30px 0}.section-heading{margin-bottom:11px}.section-heading h2{font-size:1.22rem}.section-heading p{font-size:.76rem}.eyebrow{font-size:.62rem}
+.member-card{padding:14px;background:var(--member-card-bg,var(--card))}.member-head{margin-bottom:12px}.member-emoji{width:36px;height:36px;font-size:1.05rem}.member-name{font-size:.95rem}.member-total-label{font-size:.62rem}.member-total{font-size:1.38rem;margin-bottom:9px}.member-split div,.member-average{font-size:.7rem;padding:8px}.member-split strong{font-size:.84rem}.member-average strong{font-size:.86rem}
+.calendar-card{background:var(--calendar-bg,var(--card));box-shadow:3px 3px 0 var(--ink)}.calendar-day{min-height:96px;background:var(--calendar-bg,var(--card));padding:7px}.recent-item{background:var(--recent-bg,var(--card));padding:10px 12px}.primary-btn{background:var(--accent,var(--lime))}
+main{display:flex;flex-direction:column}.month-bar{order:-100}[data-layout-section]{transition:.15s opacity}[data-layout-section].layout-hidden{display:none!important}
+.admin-view{max-width:1180px;margin:0 auto;padding:24px clamp(16px,4vw,46px) 60px}.admin-head{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:22px}.admin-head h1{font-size:1.55rem;margin:3px 0 0}.admin-head p{margin:5px 0 0;font-size:.78rem;color:#6b6b64}.admin-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.admin-card{background:var(--card);border:var(--line);border-radius:16px;padding:16px}.admin-card h2{font-size:1rem;margin:0 0 4px}.admin-card>p{margin:0 0 14px;font-size:.72rem;color:#6b6b64}.admin-setting-list{display:grid;gap:9px}.admin-setting-row{display:grid;grid-template-columns:minmax(120px,1fr) 90px 90px;gap:9px;align-items:center;padding:9px 0;border-bottom:1px dashed #c9c5bb}.admin-setting-row:last-child{border-bottom:0}.admin-setting-row label{font-size:.76rem;font-weight:700}.admin-setting-row input[type=color]{height:36px;padding:3px}.admin-setting-row select{padding:8px;font-size:.74rem}.admin-setting-row .visibility{display:flex;gap:6px;align-items:center;justify-content:flex-end;font-size:.7rem}.admin-setting-row .visibility input{width:auto}.admin-color-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.admin-color-field{display:grid;grid-template-columns:1fr 58px;align-items:center;gap:8px;border:1.5px solid var(--ink);border-radius:11px;padding:9px}.admin-color-field span{font-size:.72rem;font-weight:700}.admin-color-field input{height:34px;padding:2px}.admin-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:16px;flex-wrap:wrap}.admin-note{font-size:.68rem;color:#6b6b64;line-height:1.6;margin-top:11px}.admin-auth-form{display:grid;gap:12px}.admin-auth-form input{font-size:.9rem}.admin-status{font-size:.72rem;min-height:1.2em}
+@media(max-width:800px){.admin-grid{grid-template-columns:1fr}.admin-setting-row{grid-template-columns:1fr 78px 80px}.admin-color-grid{grid-template-columns:1fr}}
+@media(max-width:600px){html{font-size:13px}.topbar h1{font-size:1.4rem}.hero-card{min-height:78px;padding:9px 10px}.hero-card strong{font-size:.86rem}.hero-card small{font-size:.58rem}.card-label{font-size:.6rem}.member-total{font-size:1.2rem}.calendar-day{min-height:74px}.admin-view{padding:16px 11px 40px}.admin-head{align-items:flex-start}.admin-setting-row{grid-template-columns:1fr 70px 72px}}
 </style>
 </head>
 <body>
@@ -86,7 +97,8 @@ footer{text-align:center;color:#777;font-size:.78rem;padding-top:20px}
         <p class="subtitle">먹은 건 기록하고, 통장은 지키고.</p>
       </div>
       <div class="top-actions">
-        <span class="sync-pill"><i id="syncDot" class="sync-dot"></i><span id="syncText">연결 중</span></span>
+        <span class="sync-pill"><i id="syncDot" class="sync-dot ok"></i><span id="syncText">이 브라우저 저장</span></span>
+        <button id="adminBtn" class="ghost-btn">⚙ 관리자</button>
         <button id="manageMembersBtn" class="ghost-btn">👥 멤버</button>
         <button id="logoutBtn" class="ghost-btn">로그아웃</button>
       </div>
@@ -94,28 +106,36 @@ footer{text-align:center;color:#777;font-size:.78rem;padding-top:20px}
 
     <main>
       <section class="month-bar"><button id="prevMonthBtn" class="icon-btn" aria-label="이전 달">←</button><div class="month-title-wrap"><div id="monthTitle" class="month-title"></div><button id="todayBtn" class="mini-btn">이번 달</button></div><button id="nextMonthBtn" class="icon-btn" aria-label="다음 달">→</button></section>
-      <section class="hero-grid"><article class="hero-card total-card"><span class="card-label">이번 달 총지출</span><strong id="groupTotal">0원</strong><small id="groupSub">아직 기록이 없어!</small></article><article class="hero-card"><span class="card-label">👑 절약왕</span><strong id="savingKing">-</strong><small id="savingKingSub">기록이 쌓이면 결정!</small></article><article class="hero-card"><span class="card-label">📆 기록일 평균</span><strong id="dailyAverage">0원</strong><small>기록된 날짜 기준</small></article><article class="hero-card"><span class="card-label">✨ 0원 식사</span><strong id="zeroMealCount">0회</strong><small>집밥·회식·얻어먹기 모두 포함</small></article></section>
-      <section class="section-block"><div class="section-heading"><div><div class="eyebrow">WHO SAVED MORE?</div><h2>우리 셋 현황</h2></div><button id="quickAddBtn" class="primary-btn compact">＋ 오늘 기록</button></div><div id="memberCards" class="member-grid"></div></section>
-      <section class="section-block calendar-section"><div class="section-heading"><div><div class="eyebrow">MONTHLY SURVIVAL LOG</div><h2>월간 밥값 달력</h2></div><p class="muted">날짜를 누르면 기록을 추가하거나 수정할 수 있어.</p></div><div class="calendar-card"><div class="weekday-row"><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span class="sat">토</span><span class="sun">일</span></div><div id="calendarGrid" class="calendar-grid"></div></div></section>
-      <section class="section-block"><div class="section-heading"><div><div class="eyebrow">RECENT DAMAGE</div><h2>최근 지출</h2></div></div><div id="recentList" class="recent-list"></div></section>
+      <section class="hero-grid" data-layout-section="summary"><article class="hero-card total-card"><span class="card-label">👑 절약왕</span><strong id="savingKing">-</strong><small id="savingKingSub">기록이 쌓이면 결정!</small></article><article class="hero-card"><span class="card-label">🔥 지출왕</span><strong id="spendingKing">-</strong><small id="spendingKingSub">기록이 쌓이면 결정!</small></article><article class="hero-card"><span class="card-label">📆 멤버들의 하루 평균 식비</span><strong id="dailyAverage">0원</strong><small id="dailyAverageSub">멤버별 기록일 기준</small></article><article class="hero-card"><span class="card-label">✨ 0원 식사 최다 멤버</span><strong id="zeroMealKing">-</strong><small id="zeroMealKingSub">아직 0원 식사가 없어!</small></article></section>
+      <section class="section-block" data-layout-section="members"><div class="section-heading"><div><div class="eyebrow">WHO SAVED MORE?</div><h2>우리 셋 현황</h2></div><button id="quickAddBtn" class="primary-btn compact">＋ 오늘 기록</button></div><div id="memberCards" class="member-grid"></div></section>
+      <section class="section-block calendar-section" data-layout-section="calendar"><div class="section-heading"><div><div class="eyebrow">MONTHLY SURVIVAL LOG</div><h2>월간 밥값 달력</h2></div><p class="muted">날짜를 누르면 기록을 추가하거나 수정할 수 있어.</p></div><div class="calendar-card"><div class="weekday-row"><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span class="sat">토</span><span class="sun">일</span></div><div id="calendarGrid" class="calendar-grid"></div></div></section>
+      <section class="section-block" data-layout-section="recent"><div class="section-heading"><div><div class="eyebrow">RECENT DAMAGE</div><h2>최근 지출</h2></div></div><div id="recentList" class="recent-list"></div></section>
     </main>
     <footer>거지탈출은 장기전이다 · 먹되 기록하자 🍙</footer>
   </div>
+
+
+  <section id="adminView" class="admin-view hidden">
+    <div class="admin-head"><div><div class="eyebrow">LAYOUT LAB</div><h1>관리자 페이지 ⚙</h1><p>누구나 색상과 배치를 바꿀 수 있어. 설정은 이 브라우저에 저장돼.</p></div><button id="backToAppBtn" class="ghost-btn">← 돌아가기</button></div>
+    <div class="admin-grid">
+      <article class="admin-card"><h2>상단 요약 카드 색상</h2><p>절약왕·지출왕·평균식비·0원 식사 카드의 배경색.</p><div class="admin-color-grid"><label class="admin-color-field"><span>👑 절약왕</span><input id="colorSaving" type="color"></label><label class="admin-color-field"><span>🔥 지출왕</span><input id="colorSpending" type="color"></label><label class="admin-color-field"><span>📆 하루 평균</span><input id="colorAverage" type="color"></label><label class="admin-color-field"><span>✨ 0원 식사</span><input id="colorZero" type="color"></label></div></article>
+      <article class="admin-card"><h2>영역 색상</h2><p>버튼 강조색과 각 영역 카드의 기본색.</p><div class="admin-color-grid"><label class="admin-color-field"><span>강조색</span><input id="colorAccent" type="color"></label><label class="admin-color-field"><span>멤버 카드</span><input id="colorMember" type="color"></label><label class="admin-color-field"><span>달력</span><input id="colorCalendar" type="color"></label><label class="admin-color-field"><span>최근 지출</span><input id="colorRecent" type="color"></label></div></article>
+      <article class="admin-card" style="grid-column:1/-1"><h2>화면 위치 · 표시 여부</h2><p>숫자가 작을수록 위에 표시돼. 같은 숫자면 현재 순서를 유지해.</p><div id="adminSectionList" class="admin-setting-list"></div></article>
+      <article class="admin-card" style="grid-column:1/-1"><h2>데이터 백업</h2><p>GitHub Pages만 사용하므로 다른 컴퓨터로 옮길 때는 백업 파일을 사용해줘.</p><div class="admin-actions" style="justify-content:flex-start;margin-top:0"><button id="exportDataBtn" class="ghost-btn">백업 내보내기</button><button id="importDataBtn" class="ghost-btn">백업 불러오기</button><input id="importDataFile" type="file" accept="application/json,.json" class="hidden"></div></article>
+    </div>
+    <div class="admin-actions"><button id="resetUiBtn" class="ghost-btn">기본 디자인으로</button><button id="saveUiBtn" class="primary-btn">설정 저장</button></div>
+    <div class="admin-note"><b>GitHub Pages 단독 모드</b>라서 기록과 디자인 설정은 현재 브라우저의 저장공간(localStorage)에 보관돼. 다른 컴퓨터와 자동 동기화되지는 않아. 다른 기기로 옮길 땐 위의 백업 내보내기/불러오기를 사용하면 돼.</div>
+  </section>
 
   <dialog id="dayDialog" class="sheet-dialog"><div class="dialog-head"><div><div class="eyebrow">DAILY DAMAGE</div><h2 id="dialogDateTitle"></h2></div><button class="close-btn" data-close="dayDialog">×</button></div><div id="dayEntries" class="day-entries"></div><div class="form-divider"><span id="formModeTitle">기록 추가</span></div><form id="entryForm" class="entry-form"><input id="entryId" type="hidden" /><div class="form-two"><label>날짜<input id="entryDate" type="date" required /></label><label>누가 먹었어?<select id="entryMember" required></select></label></div><div class="form-two"><label>구분<select id="entryType" required><option value="lunch">🍱 점심</option><option value="dinner">🌙 저녁</option><option value="snack">🍪 간식</option><option value="etc">🧃 기타</option></select></label><label>뭐 먹었어?<input id="entryMenu" type="text" maxlength="80" placeholder="예: 한솥, 집밥, 샤브샤브" /></label></div><label>얼마 썼어?<div class="money-input"><input id="entryAmount" type="text" inputmode="text" autocomplete="off" placeholder="예: 5500+3900-1000" required /><span>원</span></div><small id="amountPreview" class="tiny muted">1원 단위 입력 · + / - 계산 가능</small></label><label>한마디<input id="entryNote" type="text" maxlength="120" placeholder="예: 오늘은 진짜 잘 참았다 😎" /></label><div class="dialog-actions"><button id="cancelEditBtn" class="ghost-btn hidden" type="button">수정 취소</button><button class="primary-btn" type="submit"><span id="saveBtnText">저장하기</span></button></div></form></dialog>
 
   <dialog id="memberDialog" class="sheet-dialog small-dialog"><div class="dialog-head"><div><div class="eyebrow">THE CREW</div><h2>멤버 관리</h2></div><button class="close-btn" data-close="memberDialog">×</button></div><div id="memberSettings" class="member-settings"></div><form id="addMemberForm" class="add-member-form"><input id="newMemberEmoji" value="🍚" maxlength="12" aria-label="이모지" title="이름 앞 이모티콘" /><input id="newMemberName" placeholder="새 멤버 이름" maxlength="20" required /><button class="primary-btn compact" type="submit">추가</button></form><p class="tiny muted">왼쪽 칸에서 이름 앞 이모티콘도 자유롭게 바꿀 수 있어. 이름·이모지를 바꾸고 저장을 눌러줘. 삭제하면 그 친구의 기록도 함께 삭제돼.</p></dialog>
   <div id="toast" class="toast"></div>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>(() => {
-  const SUPABASE_URL = "https://lficvilwbeqvttqcfhfg.supabase.co";
-  const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_fYjaKivjpq8tmjV7oJ3j5w_lNLysz6R";
-  const APP_KEY = "geoji_escape_project_v1"; // 기존 데이터와 호환 유지
-  const AUTH_STORAGE_KEY = "geoji_escape_shared_auth_v1";
-  // 사용자가 입력하는 건 4자리 PIN뿐. Supabase 인증은 화면에 노출되지 않는 전용 공유 계정으로 처리한다.
   const ACCESS_PIN = "2019";
-  const SHARED_AUTH_EMAIL = "geoji.escape.project.2019@example.com";
-  const SHARED_AUTH_PASSWORD = "geoji-escape-2019-shared";
+  const STATE_KEY = "geoji_escape_project_v1_local";
+  const UI_KEY = "geoji_escape_ui_v1_local";
+  const ACCESS_KEY = "geoji_escape_access_granted_v1";
   const $ = (s) => document.querySelector(s);
   const $$ = (s) => [...document.querySelectorAll(s)];
   const fmt = new Intl.NumberFormat("ko-KR");
@@ -132,24 +152,18 @@ footer{text-align:center;color:#777;font-size:.78rem;padding-top:20px}
     ],
     entries: []
   });
+  const defaultUiSettings = () => ({heroColors:{saving:"#c7ff42",spending:"#fff0f6",average:"#edf8ff",zero:"#fff7cf"},colors:{accent:"#c7ff42",memberCard:"#fffdf6",calendar:"#fffdf6",recent:"#fffdf6"},sections:{summary:{order:1,visible:true},members:{order:2,visible:true},calendar:{order:3,visible:true},recent:{order:4,visible:true}}});
 
-  const cloud = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
-    auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true, storageKey: AUTH_STORAGE_KEY }
-  });
-
-  let session = null;
-  let state = freshState();
+  let state = loadState();
+  let uiSettings = loadUiSettings();
   let selectedMonth = new Date();
   selectedMonth = new Date(selectedMonth.getFullYear(), selectedMonth.getMonth(), 1);
   let activeDate = null;
-  let pollTimer = null;
-  let lastProjectUpdatedAt = "";
-  let busy = false;
 
   const els = {
     authView: $("#authView"), appView: $("#appView"), loginForm: $("#loginForm"), authMessage: $("#authMessage"),
     logoutBtn: $("#logoutBtn"), syncText: $("#syncText"), syncDot: $("#syncDot"), monthTitle: $("#monthTitle"),
-    groupTotal: $("#groupTotal"), groupSub: $("#groupSub"), savingKing: $("#savingKing"), savingKingSub: $("#savingKingSub"), dailyAverage: $("#dailyAverage"), zeroMealCount: $("#zeroMealCount"),
+    savingKing: $("#savingKing"), savingKingSub: $("#savingKingSub"), spendingKing: $("#spendingKing"), spendingKingSub: $("#spendingKingSub"), dailyAverage: $("#dailyAverage"), dailyAverageSub: $("#dailyAverageSub"), zeroMealKing: $("#zeroMealKing"), zeroMealKingSub: $("#zeroMealKingSub"),
     memberCards: $("#memberCards"), calendarGrid: $("#calendarGrid"), recentList: $("#recentList"), dayDialog: $("#dayDialog"), dialogDateTitle: $("#dialogDateTitle"), dayEntries: $("#dayEntries"),
     entryForm: $("#entryForm"), entryId: $("#entryId"), entryDate: $("#entryDate"), entryMember: $("#entryMember"), entryType: $("#entryType"), entryMenu: $("#entryMenu"), entryAmount: $("#entryAmount"), amountPreview: $("#amountPreview"), entryNote: $("#entryNote"),
     formModeTitle: $("#formModeTitle"), saveBtnText: $("#saveBtnText"), cancelEditBtn: $("#cancelEditBtn"), memberDialog: $("#memberDialog"), memberSettings: $("#memberSettings"), addMemberForm: $("#addMemberForm"), toast: $("#toast")
@@ -186,173 +200,80 @@ footer{text-align:center;color:#777;font-size:.78rem;padding-top:20px}
   function normalizeProject(raw){
     const base=freshState();
     if(!raw || typeof raw!=="object") return base;
-    return {
-      version:1,
-      updated_at: raw.updated_at || new Date().toISOString(),
-      members:Array.isArray(raw.members)&&raw.members.length ? raw.members.map((m,i)=>({id:m.id||makeId(),name:String(m.name||`멤버${i+1}`),emoji:String(m.emoji||"🍚"),sort_order:Number(m.sort_order||i+1)})) : base.members,
-      entries:Array.isArray(raw.entries) ? raw.entries.map(e=>({id:e.id||makeId(),member_id:e.member_id,spent_on:e.spent_on,meal_type:e.meal_type||"etc",menu:e.menu||"",amount:Number(e.amount||0),note:e.note||"",created_at:e.created_at||new Date().toISOString(),updated_at:e.updated_at||e.created_at||new Date().toISOString()})) : []
-    };
+    return {version:1,updated_at:raw.updated_at||new Date().toISOString(),members:Array.isArray(raw.members)&&raw.members.length?raw.members.map((m,i)=>({id:m.id||makeId(),name:String(m.name||`멤버${i+1}`),emoji:String(m.emoji||"🍚"),sort_order:Number(m.sort_order||i+1)})):base.members,entries:Array.isArray(raw.entries)?raw.entries.map(e=>({id:e.id||makeId(),member_id:e.member_id,spent_on:e.spent_on,meal_type:e.meal_type||"etc",menu:e.menu||"",amount:Number(e.amount||0),note:e.note||"",created_at:e.created_at||new Date().toISOString(),updated_at:e.updated_at||e.created_at||new Date().toISOString()})):[]};
   }
-  function rootObject(data){ return data && typeof data==="object" && !Array.isArray(data) ? data : (data==null?{}:{_legacy_money_note_data:data}); }
+  function normalizeUiSettings(raw){const d=defaultUiSettings(),r=(raw&&typeof raw==="object")?raw:{};return {heroColors:{...d.heroColors,...(r.heroColors||{})},colors:{...d.colors,...(r.colors||{})},sections:Object.fromEntries(Object.keys(d.sections).map(k=>[k,{...d.sections[k],...(r.sections?.[k]||{})}]))};}
+  function loadState(){ try{return normalizeProject(JSON.parse(localStorage.getItem(STATE_KEY)||"null")||freshState());}catch(_){return freshState();} }
+  function saveState(){ state.updated_at=new Date().toISOString(); localStorage.setItem(STATE_KEY,JSON.stringify(state)); setSync("ok","이 브라우저 저장"); }
+  function loadUiSettings(){ try{return normalizeUiSettings(JSON.parse(localStorage.getItem(UI_KEY)||"null")||defaultUiSettings());}catch(_){return defaultUiSettings();} }
+  function saveUiSettings(){ localStorage.setItem(UI_KEY,JSON.stringify(uiSettings)); }
+  async function mutateProject(mutator,successMessage="저장했어!"){ const next=clone(state); await mutator(next); state=normalizeProject(next); saveState(); renderAll(); if(successMessage)toast(successMessage); }
 
-  async function fetchRoot(){
-    const {data,error}=await cloud.from("money_state").select("data,updated_at").eq("user_id",session.user.id).maybeSingle();
-    if(error) throw error;
-    return { root: rootObject(data?.data), rowUpdatedAt:data?.updated_at||"" };
-  }
+  function applyUiSettings(){const s=normalizeUiSettings(uiSettings);uiSettings=s;document.documentElement.style.setProperty("--accent",s.colors.accent);document.documentElement.style.setProperty("--member-card-bg",s.colors.memberCard);document.documentElement.style.setProperty("--calendar-bg",s.colors.calendar);document.documentElement.style.setProperty("--recent-bg",s.colors.recent);const hero=$('[data-layout-section="summary"]');if(hero){const cards=hero.querySelectorAll(".hero-card"),cols=[s.heroColors.saving,s.heroColors.spending,s.heroColors.average,s.heroColors.zero];cards.forEach((c,i)=>{if(cols[i])c.style.background=cols[i];});}$$('[data-layout-section]').forEach(el=>{const k=el.dataset.layoutSection,c=s.sections[k]||{order:99,visible:true};el.style.order=String(Number(c.order)||99);el.classList.toggle("layout-hidden",c.visible===false);});}
+  function renderAdminControls(){const s=normalizeUiSettings(uiSettings),vals={colorSaving:s.heroColors.saving,colorSpending:s.heroColors.spending,colorAverage:s.heroColors.average,colorZero:s.heroColors.zero,colorAccent:s.colors.accent,colorMember:s.colors.memberCard,colorCalendar:s.colors.calendar,colorRecent:s.colors.recent};Object.entries(vals).forEach(([id,v])=>{const el=$("#"+id);if(el)el.value=v;});const labels={summary:"상단 요약",members:"멤버 지출현황",calendar:"월간 밥값 달력",recent:"최근 지출"};const wrap=$("#adminSectionList");if(!wrap)return;wrap.innerHTML=Object.keys(labels).map(k=>{const c=s.sections[k];return `<div class="admin-setting-row" data-section-key="${k}"><label>${labels[k]}</label><select class="order-select">${[1,2,3,4].map(n=>`<option value="${n}" ${Number(c.order)===n?"selected":""}>${n}번째</option>`).join("")}</select><label class="visibility"><input class="visible-check" type="checkbox" ${c.visible!==false?"checked":""}> 표시</label></div>`}).join("");}
+  function collectAdminSettings(){const s=defaultUiSettings();s.heroColors={saving:$("#colorSaving").value,spending:$("#colorSpending").value,average:$("#colorAverage").value,zero:$("#colorZero").value};s.colors={accent:$("#colorAccent").value,memberCard:$("#colorMember").value,calendar:$("#colorCalendar").value,recent:$("#colorRecent").value};$$("#adminSectionList [data-section-key]").forEach(row=>{const k=row.dataset.sectionKey;s.sections[k]={order:Number(row.querySelector(".order-select").value)||99,visible:row.querySelector(".visible-check").checked};});return s;}
+  function showAdminPage(){els.appView.classList.add("hidden");$("#adminView").classList.remove("hidden");renderAdminControls();applyUiSettings();}
+  function closeAdminPage(){$("#adminView").classList.add("hidden");els.appView.classList.remove("hidden");applyUiSettings();}
+  function renderAll(){ els.monthTitle.textContent=displayMonth(); renderSummary(); renderMembers(); renderCalendar(); renderRecent(); renderMemberSelect(); renderMemberSettings(); applyUiSettings(); }
 
-  async function writeProject(project, latestRoot=null){
-    const base = latestRoot ?? (await fetchRoot()).root;
-    const nextRoot = {...base, [APP_KEY]: project};
-    const {error}=await cloud.from("money_state").upsert({user_id:session.user.id,data:nextRoot,updated_at:new Date().toISOString()},{onConflict:"user_id"});
-    if(error) throw error;
-  }
-
-  async function loadCloud({seedIfMissing=true,quiet=false}={}){
-    if(!session) return;
-    try{
-      if(!quiet) setSync("","불러오는 중");
-      const {root}=await fetchRoot();
-      let project=root[APP_KEY];
-      if(!project && seedIfMissing){
-        project=freshState();
-        await writeProject(project,root);
-      }
-      state=normalizeProject(project||freshState());
-      lastProjectUpdatedAt=state.updated_at||"";
-      renderAll();
-      setSync("ok","동기화됨");
-    }catch(err){
-      console.error(err); setSync("err","DB 확인 필요");
-      if(!quiet) toast("데이터를 불러오지 못했어 😭");
-    }
-  }
-
-  async function mutateProject(mutator,successMessage="저장했어!"){
-    if(busy) return;
-    busy=true; setSync("","저장 중");
-    try{
-      const {root}=await fetchRoot();
-      const latest=normalizeProject(root[APP_KEY]||state||freshState());
-      await mutator(latest);
-      latest.updated_at=new Date().toISOString();
-      await writeProject(latest,root);
-      state=latest; lastProjectUpdatedAt=latest.updated_at; renderAll(); setSync("ok","동기화됨");
-      if(successMessage) toast(successMessage);
-    }catch(err){ console.error(err); setSync("err","저장 실패"); toast("저장 실패 😭"); }
-    finally{ busy=false; }
-  }
-
-  function renderAll(){ els.monthTitle.textContent=displayMonth(); renderSummary(); renderMembers(); renderCalendar(); renderRecent(); renderMemberSelect(); renderMemberSettings(); }
   function renderSummary(){
-    const entries=monthEntries(); const total=entries.reduce((s,e)=>s+Number(e.amount||0),0); const dates=new Set(entries.map(e=>e.spent_on));
-    const per=state.members.map(m=>({...m,total:entries.filter(e=>e.member_id===m.id).reduce((s,e)=>s+Number(e.amount||0),0)}));
-    const king=per.length&&entries.length?[...per].sort((a,b)=>a.total-b.total)[0]:null;
-    els.groupTotal.textContent=money(total); els.groupSub.textContent=dates.size?`${dates.size}일 동안 기록했어`:"아직 기록이 없어!";
-    els.savingKing.textContent=king?`${king.emoji||"🍚"} ${king.name}`:"-"; els.savingKingSub.textContent=king?`${money(king.total)}로 1등`:"기록이 쌓이면 결정!";
-    els.dailyAverage.textContent=dates.size?money(Math.round(total/dates.size)):"0원"; els.zeroMealCount.textContent=`${entries.filter(e=>Number(e.amount)===0).length}회`;
+    const entries=monthEntries();
+    const per=state.members.map(m=>{const mine=entries.filter(e=>e.member_id===m.id);const dates=new Set(mine.map(e=>e.spent_on));const total=mine.reduce((s,e)=>s+Number(e.amount||0),0);return {...m,total,recordCount:mine.length,recordDays:dates.size,zeroMeals:mine.filter(e=>Number(e.amount)===0).length};});
+    const ranked=per.filter(m=>m.recordCount>0);const saver=ranked.length?[...ranked].sort((a,b)=>a.total-b.total||a.name.localeCompare(b.name,"ko"))[0]:null;const spender=ranked.length?[...ranked].sort((a,b)=>b.total-a.total||a.name.localeCompare(b.name,"ko"))[0]:null;const totalAll=ranked.reduce((s,m)=>s+m.total,0);const memberDays=ranked.reduce((s,m)=>s+m.recordDays,0);const avg=memberDays?Math.round(totalAll/memberDays):0;const zeroMax=ranked.length?Math.max(...ranked.map(m=>m.zeroMeals)):0;const zeroKings=zeroMax>0?ranked.filter(m=>m.zeroMeals===zeroMax):[];
+    els.savingKing.textContent=saver?`${saver.emoji||"🍚"} ${saver.name}`:"-";els.savingKingSub.textContent=saver?`${money(saver.total)} · 이번 달 최소 지출`:"기록이 쌓이면 결정!";els.spendingKing.textContent=spender?`${spender.emoji||"🍚"} ${spender.name}`:"-";els.spendingKingSub.textContent=spender?`${money(spender.total)} · 이번 달 최대 지출`:"기록이 쌓이면 결정!";els.dailyAverage.textContent=money(avg);els.dailyAverageSub.textContent=memberDays?`멤버별 기록일 ${memberDays}일 합산 기준`:"멤버별 기록일 기준";els.zeroMealKing.textContent=zeroKings.length?zeroKings.map(m=>`${m.emoji||"🍚"} ${m.name}`).join(" · "):"-";els.zeroMealKingSub.textContent=zeroKings.length?`${zeroMax}회 · 0원 식사 최다`:"아직 0원 식사가 없어!";
   }
   function renderMembers(){
     const entries=monthEntries(); if(!state.members.length){els.memberCards.innerHTML='<div class="empty">멤버를 먼저 추가해줘!</div>';return;}
-    const stats=state.members.slice().sort((a,b)=>a.sort_order-b.sort_order).map(m=>{const mine=entries.filter(e=>e.member_id===m.id);return {...m,total:mine.reduce((s,e)=>s+Number(e.amount||0),0),lunch:mine.filter(e=>e.meal_type==="lunch").reduce((s,e)=>s+Number(e.amount||0),0),dinner:mine.filter(e=>e.meal_type==="dinner").reduce((s,e)=>s+Number(e.amount||0),0)};});
-    const min=entries.length?Math.min(...stats.map(s=>s.total)):-1;
-    els.memberCards.innerHTML=stats.map(s=>`<article class="member-card ${s.total===min&&min>=0?"king":""}"><div class="member-head"><div class="member-emoji">${esc(s.emoji||"🍚")}</div><div><div class="member-name">${esc(s.name)}</div><div class="tiny muted">${displayMonth()} 생존비</div></div></div><div class="member-total">${money(s.total)}</div><div class="member-split"><div>🍱 점심<strong>${money(s.lunch)}</strong></div><div>🌙 저녁<strong>${money(s.dinner)}</strong></div></div></article>`).join("");
+    const stats=state.members.slice().sort((a,b)=>a.sort_order-b.sort_order).map(m=>{const mine=entries.filter(e=>e.member_id===m.id),dates=new Set(mine.map(e=>e.spent_on));const total=mine.reduce((s,e)=>s+Number(e.amount||0),0);return {...m,total,lunch:mine.filter(e=>e.meal_type==="lunch").reduce((s,e)=>s+Number(e.amount||0),0),dinner:mine.filter(e=>e.meal_type==="dinner").reduce((s,e)=>s+Number(e.amount||0),0),recordCount:mine.length,recordDays:dates.size,dailyAvg:dates.size?Math.round(total/dates.size):0};});
+    const recorded=stats.filter(s=>s.recordCount>0),min=recorded.length?Math.min(...recorded.map(s=>s.total)):-1;
+    els.memberCards.innerHTML=stats.map(s=>`<article class="member-card ${s.recordCount>0&&s.total===min?"king":""}"><div class="member-head"><div class="member-emoji">${esc(s.emoji||"🍚")}</div><div><div class="member-name">${esc(s.name)}</div><div class="tiny muted">${displayMonth()} 생존비 · ${s.recordDays}일 기록</div></div></div><div class="member-total-label">이번달 총 식비</div><div class="member-total">${money(s.total)}</div><div class="member-split"><div>🍱 점심<strong>${money(s.lunch)}</strong></div><div>🌙 저녁<strong>${money(s.dinner)}</strong></div></div><div class="member-average"><span>📆 하루 평균 식비</span><strong>${money(s.dailyAvg)}</strong></div></article>`).join("");
   }
   function renderCalendar(){
-    const y=selectedMonth.getFullYear(),m=selectedMonth.getMonth(),first=new Date(y,m,1),startOffset=(first.getDay()+6)%7,gridStart=new Date(y,m,1-startOffset),today=localDateISO(new Date());
-    const byDate=new Map(); state.entries.forEach(e=>{if(!byDate.has(e.spent_on))byDate.set(e.spent_on,[]);byDate.get(e.spent_on).push(e);}); let html="";
+    const y=selectedMonth.getFullYear(),m=selectedMonth.getMonth(),first=new Date(y,m,1),startOffset=(first.getDay()+6)%7,gridStart=new Date(y,m,1-startOffset),today=localDateISO(new Date());const byDate=new Map();state.entries.forEach(e=>{if(!byDate.has(e.spent_on))byDate.set(e.spent_on,[]);byDate.get(e.spent_on).push(e);});let html="";
     for(let i=0;i<42;i++){const d=new Date(gridStart);d.setDate(gridStart.getDate()+i);const iso=localDateISO(d),dayEntries=byDate.get(iso)||[],total=dayEntries.reduce((s,e)=>s+Number(e.amount||0),0),pills=dayEntries.slice(0,3).map(e=>`<span class="day-pill">${esc(memberOf(e.member_id).emoji||"🍚")} ${mealEmoji[e.meal_type]||"🍴"}</span>`).join("");html+=`<button class="calendar-day ${d.getMonth()!==m?"other-month":""} ${iso===today?"today":""} ${dayEntries.length?"has-entry":""}" data-date="${iso}"><span class="day-num">${d.getDate()}</span><div class="day-pills">${pills}</div>${dayEntries.length?`<span class="day-total">${money(total)}</span>`:""}</button>`;}
-    els.calendarGrid.innerHTML=html; $$(".calendar-day").forEach(btn=>btn.addEventListener("click",()=>openDay(btn.dataset.date)));
+    els.calendarGrid.innerHTML=html;$$('.calendar-day').forEach(btn=>btn.addEventListener('click',()=>openDay(btn.dataset.date)));
   }
-  function renderRecent(){
-    const sorted=[...monthEntries()].sort((a,b)=>`${b.spent_on}${b.created_at||""}`.localeCompare(`${a.spent_on}${a.created_at||""}`)).slice(0,10);
-    if(!sorted.length){els.recentList.innerHTML='<div class="empty">이번 달 기록이 아직 없어. 첫 밥값을 기록해보자 🍚</div>';return;}
-    els.recentList.innerHTML=sorted.map(e=>{const m=memberOf(e.member_id),d=parseISO(e.spent_on);return `<div class="recent-item"><div class="recent-date">${d.getMonth()+1}/${d.getDate()} · ${mealLabel[e.meal_type]||"기타"}</div><div class="recent-main"><strong>${esc(m.emoji||"🍚")} ${esc(m.name)} · ${esc(e.menu||"메뉴 미입력")}</strong><span>${esc(e.note||"")}</span></div><div class="recent-amount">${money(e.amount)}</div></div>`;}).join("");
-  }
+  function renderRecent(){const sorted=[...monthEntries()].sort((a,b)=>`${b.spent_on}${b.created_at||""}`.localeCompare(`${a.spent_on}${a.created_at||""}`)).slice(0,10);if(!sorted.length){els.recentList.innerHTML='<div class="empty">이번 달 기록이 아직 없어. 첫 밥값을 기록해보자 🍚</div>';return;}els.recentList.innerHTML=sorted.map(e=>{const m=memberOf(e.member_id),d=parseISO(e.spent_on);return `<div class="recent-item"><div class="recent-date">${d.getMonth()+1}/${d.getDate()} · ${mealLabel[e.meal_type]||"기타"}</div><div class="recent-main"><strong>${esc(m.emoji||"🍚")} ${esc(m.name)} · ${esc(e.menu||"메뉴 미입력")}</strong><span>${esc(e.note||"")}</span></div><div class="recent-amount">${money(e.amount)}</div></div>`;}).join("");}
   function renderMemberSelect(){const current=els.entryMember.value;els.entryMember.innerHTML=state.members.slice().sort((a,b)=>a.sort_order-b.sort_order).map(m=>`<option value="${m.id}">${esc(m.emoji||"🍚")} ${esc(m.name)}</option>`).join("");if(current&&state.members.some(m=>m.id===current))els.entryMember.value=current;}
-  function renderMemberSettings(){
-    els.memberSettings.innerHTML=state.members.slice().sort((a,b)=>a.sort_order-b.sort_order).map(m=>`<div class="member-setting" data-id="${m.id}"><input class="emoji-input" value="${esc(m.emoji||"🍚")}" maxlength="12" aria-label="${esc(m.name)} 이모티콘" title="이름 앞 이모티콘"><input class="name-input" value="${esc(m.name)}" maxlength="20" aria-label="멤버 이름"><button class="small-action save-member">저장</button><span></span><button class="small-action danger delete-member">삭제</button></div>`).join("")||'<div class="empty">멤버가 없어!</div>';
-    $$(".save-member").forEach(b=>b.addEventListener("click",()=>{const row=b.closest(".member-setting"),id=row.dataset.id,name=row.querySelector(".name-input").value.trim(),emoji=row.querySelector(".emoji-input").value.trim()||"🍚";if(!name)return toast("이름을 입력해줘!");mutateProject(p=>{const m=p.members.find(x=>x.id===id);if(m){m.name=name;m.emoji=emoji;}},"이름·이모티콘 저장 완료!");}));
-    $$(".delete-member").forEach(b=>b.addEventListener("click",()=>{const row=b.closest(".member-setting"),id=row.dataset.id,m=memberOf(id);if(!confirm(`${m.name} 멤버와 모든 기록을 삭제할까?`))return;mutateProject(p=>{p.members=p.members.filter(x=>x.id!==id);p.entries=p.entries.filter(e=>e.member_id!==id);},"삭제했어.");}));
-  }
+  function renderMemberSettings(){els.memberSettings.innerHTML=state.members.slice().sort((a,b)=>a.sort_order-b.sort_order).map(m=>`<div class="member-setting" data-id="${m.id}"><input class="emoji-input" value="${esc(m.emoji||"🍚")}" maxlength="12" aria-label="${esc(m.name)} 이모티콘" title="이름 앞 이모티콘"><input class="name-input" value="${esc(m.name)}" maxlength="20" aria-label="멤버 이름"><button class="small-action save-member">저장</button><span></span><button class="small-action danger delete-member">삭제</button></div>`).join("")||'<div class="empty">멤버가 없어!</div>';$$(".save-member").forEach(b=>b.addEventListener("click",()=>{const row=b.closest(".member-setting"),id=row.dataset.id,name=row.querySelector(".name-input").value.trim(),emoji=row.querySelector(".emoji-input").value.trim()||"🍚";if(!name)return toast("이름을 입력해줘!");mutateProject(p=>{const m=p.members.find(x=>x.id===id);if(m){m.name=name;m.emoji=emoji;}},"이름·이모티콘 저장 완료!");}));$$(".delete-member").forEach(b=>b.addEventListener("click",()=>{const row=b.closest(".member-setting"),id=row.dataset.id,m=memberOf(id);if(!confirm(`${m.name} 멤버와 모든 기록을 삭제할까?`))return;mutateProject(p=>{p.members=p.members.filter(x=>x.id!==id);p.entries=p.entries.filter(e=>e.member_id!==id);},"삭제했어.");}));}
   function openDay(iso){activeDate=iso;const d=parseISO(iso);els.dialogDateTitle.textContent=`${d.getFullYear()}년 ${d.getMonth()+1}월 ${d.getDate()}일`;resetEntryForm();els.entryDate.value=iso;renderDayEntries();els.dayDialog.showModal();}
   function renderDayEntries(){const day=state.entries.filter(e=>e.spent_on===activeDate).sort((a,b)=>String(a.meal_type).localeCompare(String(b.meal_type)));if(!day.length){els.dayEntries.innerHTML='<div class="empty">아직 아무것도 안 썼다! 🎉<br><span class="tiny">…혹은 아직 기록을 안 한 걸지도?</span></div>';return;}els.dayEntries.innerHTML=day.map(e=>{const m=memberOf(e.member_id);return `<div class="day-entry" data-id="${e.id}"><div class="emoji">${esc(m.emoji||"🍚")}</div><div class="entry-copy"><strong>${esc(m.name)} · ${mealEmoji[e.meal_type]||"🍴"} ${esc(e.menu||mealLabel[e.meal_type])}</strong><span>${esc(e.note||"")}</span></div><div class="entry-side"><strong>${money(e.amount)}</strong><div class="entry-actions"><button class="edit-entry">수정</button><button class="delete-entry danger">삭제</button></div></div></div>`;}).join("");$$(".edit-entry").forEach(b=>b.addEventListener("click",()=>editEntry(b.closest(".day-entry").dataset.id)));$$(".delete-entry").forEach(b=>b.addEventListener("click",()=>deleteEntry(b.closest(".day-entry").dataset.id)));}
   function editEntry(id){const e=state.entries.find(x=>String(x.id)===String(id));if(!e)return;els.entryId.value=e.id;els.entryDate.value=e.spent_on;els.entryMember.value=e.member_id;els.entryType.value=e.meal_type;els.entryMenu.value=e.menu||"";els.entryAmount.value=String(e.amount??0);els.entryNote.value=e.note||"";els.formModeTitle.textContent="기록 수정";els.saveBtnText.textContent="수정 저장";els.cancelEditBtn.classList.remove("hidden");updateAmountPreview();els.entryDate.focus();}
   function deleteEntry(id){if(!confirm("이 기록을 삭제할까?"))return;mutateProject(p=>{p.entries=p.entries.filter(e=>String(e.id)!==String(id));},"기록 삭제 완료").then(()=>renderDayEntries());}
   function resetEntryForm(){els.entryForm.reset();els.entryId.value="";els.entryDate.value=activeDate||localDateISO(new Date());els.entryAmount.value="";els.formModeTitle.textContent="기록 추가";els.saveBtnText.textContent="저장하기";els.cancelEditBtn.classList.add("hidden");renderMemberSelect();updateAmountPreview();}
 
-  async function route(){
-    if(!session){els.appView.classList.add("hidden");els.authView.classList.remove("hidden");if(pollTimer){clearInterval(pollTimer);pollTimer=null;}return;}
-    els.authView.classList.add("hidden");els.appView.classList.remove("hidden");await loadCloud();
-    if(!pollTimer) pollTimer=setInterval(async()=>{if(!session||document.hidden||busy)return;try{const {root}=await fetchRoot();const p=root[APP_KEY];if(p?.updated_at&&p.updated_at!==lastProjectUpdatedAt){state=normalizeProject(p);lastProjectUpdatedAt=state.updated_at;renderAll();setSync("ok","새 기록 반영");setTimeout(()=>setSync("ok","동기화됨"),1200);}}catch(_e){}},7000);
-  }
-
   function authMsg(text,isError=false){els.authMessage.textContent=text;els.authMessage.style.color=isError?"#c73838":"#376f3e";}
-  async function enterWithPin(pin){
-    if(pin !== ACCESS_PIN){ authMsg("비밀번호가 틀렸어 👀", true); return; }
-    authMsg("입장 중... 💸");
+  function route(){const granted=localStorage.getItem(ACCESS_KEY)==="yes";$("#adminView").classList.add("hidden");if(!granted){els.appView.classList.add("hidden");els.authView.classList.remove("hidden");return;}els.authView.classList.add("hidden");els.appView.classList.remove("hidden");state=loadState();uiSettings=loadUiSettings();renderAll();setSync("ok","이 브라우저 저장");}
 
-    // 이미 전용 공유 계정이 있으면 로그인하고, 최초 접속이면 자동으로 만든다.
-    let result = await cloud.auth.signInWithPassword({email:SHARED_AUTH_EMAIL,password:SHARED_AUTH_PASSWORD});
-    if(!result.error) return;
-
-    const signup = await cloud.auth.signUp({
-      email: SHARED_AUTH_EMAIL,
-      password: SHARED_AUTH_PASSWORD,
-      options: { data: { app: "geoji_escape_project" } }
-    });
-    if(signup.error){
-      console.error(signup.error);
-      authMsg("공용 저장공간 연결에 실패했어. Supabase 설정을 한 번 확인해줘.", true);
-      return;
-    }
-    if(!signup.data.session){
-      authMsg("공용 계정은 만들어졌는데 이메일 확인 설정이 켜져 있어. Supabase에서 Confirm email만 꺼주면 돼.", true);
-      return;
-    }
-    authMsg("입장 완료 ✨");
-  }
+  function exportBackup(){const payload={app:"거지탈출 프로젝트",version:1,exported_at:new Date().toISOString(),state,uiSettings};const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download=`거지탈출_백업_${localDateISO(new Date())}.json`;document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);toast("백업 파일을 만들었어!");}
+  async function importBackup(file){try{const parsed=JSON.parse(await file.text());const nextState=normalizeProject(parsed.state||parsed.project||parsed);const nextUi=normalizeUiSettings(parsed.uiSettings||parsed.ui||{});if(!confirm("현재 브라우저의 기록과 디자인 설정을 백업 내용으로 교체할까?"))return;state=nextState;uiSettings=nextUi;saveState();saveUiSettings();renderAll();renderAdminControls();toast("백업 불러오기 완료!");}catch(err){console.error(err);toast("백업 파일을 읽지 못했어 😭");}}
 
   function bindEvents(){
-    els.loginForm.addEventListener("submit",async e=>{
-      e.preventDefault();
-      const pin=$("#accessPin").value.trim();
-      if(!pin) return;
-      await enterWithPin(pin);
-    });
-    els.logoutBtn.addEventListener("click",()=>cloud.auth.signOut());
+    els.loginForm.addEventListener("submit",e=>{e.preventDefault();const pin=$("#accessPin").value.trim();if(pin!==ACCESS_PIN)return authMsg("비밀번호가 틀렸어 👀",true);localStorage.setItem(ACCESS_KEY,"yes");authMsg("입장 완료 ✨");route();});
+    els.logoutBtn.addEventListener("click",()=>{localStorage.removeItem(ACCESS_KEY);route();});
     $("#prevMonthBtn").addEventListener("click",()=>{selectedMonth=new Date(selectedMonth.getFullYear(),selectedMonth.getMonth()-1,1);renderAll();});
     $("#nextMonthBtn").addEventListener("click",()=>{selectedMonth=new Date(selectedMonth.getFullYear(),selectedMonth.getMonth()+1,1);renderAll();});
     $("#todayBtn").addEventListener("click",()=>{const n=new Date();selectedMonth=new Date(n.getFullYear(),n.getMonth(),1);renderAll();});
-    $("#quickAddBtn").addEventListener("click",()=>openDay(localDateISO(new Date())));$("#manageMembersBtn").addEventListener("click",()=>els.memberDialog.showModal());$$('[data-close]').forEach(b=>b.addEventListener("click",()=>$("#"+b.dataset.close).close()));els.cancelEditBtn.addEventListener("click",resetEntryForm);
-    els.entryForm.addEventListener("submit",async e=>{
-      e.preventDefault();
-      if(!state.members.length) return toast("멤버를 먼저 추가해줘!");
-      const amountResult=parseAmountExpression(els.entryAmount.value);
-      if(!amountResult.ok){ toast(amountResult.error); els.entryAmount.focus(); return; }
-      const id=els.entryId.value;
-      const spentOn=els.entryDate.value;
-      if(!spentOn){ toast("날짜를 선택해줘!"); els.entryDate.focus(); return; }
-      const payload={id:id||makeId(),member_id:els.entryMember.value,spent_on:spentOn,meal_type:els.entryType.value,menu:els.entryMenu.value.trim(),amount:amountResult.value,note:els.entryNote.value.trim(),created_at:new Date().toISOString(),updated_at:new Date().toISOString()};
-      await mutateProject(p=>{if(id){const i=p.entries.findIndex(x=>String(x.id)===String(id));if(i>=0){payload.created_at=p.entries[i].created_at||payload.created_at;p.entries[i]=payload;}else p.entries.push(payload);}else p.entries.push(payload);},id?"수정했어!":"기록 완료 💸");
-      if(activeDate!==spentOn){
-        activeDate=spentOn;
-        const d=parseISO(spentOn);
-        selectedMonth=new Date(d.getFullYear(),d.getMonth(),1);
-        els.dialogDateTitle.textContent=`${d.getFullYear()}년 ${d.getMonth()+1}월 ${d.getDate()}일`;
-        renderAll();
-      }
-      resetEntryForm();
-      renderDayEntries();
-    });
+    $("#quickAddBtn").addEventListener("click",()=>openDay(localDateISO(new Date())));
+    $("#manageMembersBtn").addEventListener("click",()=>els.memberDialog.showModal());
+    $("#adminBtn").addEventListener("click",showAdminPage);
+    $("#backToAppBtn").addEventListener("click",closeAdminPage);
+    $$('[data-close]').forEach(b=>b.addEventListener("click",()=>$("#"+b.dataset.close).close()));
+    els.cancelEditBtn.addEventListener("click",resetEntryForm);
+    els.entryForm.addEventListener("submit",async e=>{e.preventDefault();if(!state.members.length)return toast("멤버를 먼저 추가해줘!");const amountResult=parseAmountExpression(els.entryAmount.value);if(!amountResult.ok){toast(amountResult.error);els.entryAmount.focus();return;}const id=els.entryId.value,spentOn=els.entryDate.value;if(!spentOn){toast("날짜를 선택해줘!");els.entryDate.focus();return;}const payload={id:id||makeId(),member_id:els.entryMember.value,spent_on:spentOn,meal_type:els.entryType.value,menu:els.entryMenu.value.trim(),amount:amountResult.value,note:els.entryNote.value.trim(),created_at:new Date().toISOString(),updated_at:new Date().toISOString()};await mutateProject(p=>{if(id){const i=p.entries.findIndex(x=>String(x.id)===String(id));if(i>=0){payload.created_at=p.entries[i].created_at||payload.created_at;p.entries[i]=payload;}else p.entries.push(payload);}else p.entries.push(payload);},id?"수정했어!":"기록 완료 💸");if(activeDate!==spentOn){activeDate=spentOn;const d=parseISO(spentOn);selectedMonth=new Date(d.getFullYear(),d.getMonth(),1);els.dialogDateTitle.textContent=`${d.getFullYear()}년 ${d.getMonth()+1}월 ${d.getDate()}일`;renderAll();}resetEntryForm();renderDayEntries();});
     els.addMemberForm.addEventListener("submit",async e=>{e.preventDefault();const name=$("#newMemberName").value.trim(),emoji=$("#newMemberEmoji").value.trim()||"🍚";if(!name)return;await mutateProject(p=>{const next=Math.max(0,...p.members.map(m=>Number(m.sort_order||0)))+1;p.members.push({id:makeId(),name,emoji,sort_order:next});},"멤버 추가 완료!");$("#newMemberName").value="";});
+    $("#saveUiBtn").addEventListener("click",()=>{uiSettings=normalizeUiSettings(collectAdminSettings());saveUiSettings();applyUiSettings();renderAdminControls();toast("디자인 설정 저장 완료!");});
+    $("#resetUiBtn").addEventListener("click",()=>{uiSettings=defaultUiSettings();saveUiSettings();renderAdminControls();applyUiSettings();toast("기본 디자인으로 돌렸어!");});
+    $("#exportDataBtn").addEventListener("click",exportBackup);
+    $("#importDataBtn").addEventListener("click",()=>$("#importDataFile").click());
+    $("#importDataFile").addEventListener("change",e=>{const file=e.target.files?.[0];if(file)importBackup(file);e.target.value="";});
     els.entryAmount?.addEventListener("input",updateAmountPreview);
-    const pinInput=$("#accessPin");
-    pinInput?.addEventListener("input",()=>{ pinInput.value=pinInput.value.replace(/\D/g,"").slice(0,4); });
-    window.addEventListener("focus",()=>{if(session)loadCloud({seedIfMissing:false,quiet:true});});
+    const pinInput=$("#accessPin");pinInput?.addEventListener("input",()=>{pinInput.value=pinInput.value.replace(/\D/g,"").slice(0,4);});
+    $$('#adminView input[type="color"], #adminView select, #adminView input[type="checkbox"]').forEach(el=>el.addEventListener("input",()=>{try{uiSettings=normalizeUiSettings(collectAdminSettings());applyUiSettings();}catch(_){}}));
+    window.addEventListener("storage",e=>{if(e.key===STATE_KEY||e.key===UI_KEY){state=loadState();uiSettings=loadUiSettings();renderAll();}});
   }
 
-  async function init(){bindEvents();const {data}=await cloud.auth.getSession();session=data.session;cloud.auth.onAuthStateChange((_event,newSession)=>{session=newSession;route();});route();}
+  function init(){bindEvents();route();}
   init();
 })();</script>
 </body>
