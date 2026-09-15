@@ -102,15 +102,15 @@ footer{text-align:center;color:#777;font-size:.78rem;padding-top:20px}
     <footer>거지탈출은 장기전이다 · 먹되 기록하자 🍙</footer>
   </div>
 
-  <dialog id="dayDialog" class="sheet-dialog"><div class="dialog-head"><div><div class="eyebrow">DAILY DAMAGE</div><h2 id="dialogDateTitle"></h2></div><button class="close-btn" data-close="dayDialog">×</button></div><div id="dayEntries" class="day-entries"></div><div class="form-divider"><span id="formModeTitle">기록 추가</span></div><form id="entryForm" class="entry-form"><input id="entryId" type="hidden" /><input id="entryDate" type="hidden" /><div class="form-two"><label>누가 먹었어?<select id="entryMember" required></select></label><label>구분<select id="entryType" required><option value="lunch">🍱 점심</option><option value="dinner">🌙 저녁</option><option value="snack">🍪 간식</option><option value="etc">🧃 기타</option></select></label></div><label>뭐 먹었어?<input id="entryMenu" type="text" maxlength="80" placeholder="예: 한솥, 집밥, 샤브샤브" /></label><label>얼마 썼어?<div class="money-input"><input id="entryAmount" type="number" min="0" step="100" inputmode="numeric" placeholder="0" required /><span>원</span></div></label><label>한마디<input id="entryNote" type="text" maxlength="120" placeholder="예: 오늘은 진짜 잘 참았다 😎" /></label><div class="dialog-actions"><button id="cancelEditBtn" class="ghost-btn hidden" type="button">수정 취소</button><button class="primary-btn" type="submit"><span id="saveBtnText">저장하기</span></button></div></form></dialog>
+  <dialog id="dayDialog" class="sheet-dialog"><div class="dialog-head"><div><div class="eyebrow">DAILY DAMAGE</div><h2 id="dialogDateTitle"></h2></div><button class="close-btn" data-close="dayDialog">×</button></div><div id="dayEntries" class="day-entries"></div><div class="form-divider"><span id="formModeTitle">기록 추가</span></div><form id="entryForm" class="entry-form"><input id="entryId" type="hidden" /><div class="form-two"><label>날짜<input id="entryDate" type="date" required /></label><label>누가 먹었어?<select id="entryMember" required></select></label></div><div class="form-two"><label>구분<select id="entryType" required><option value="lunch">🍱 점심</option><option value="dinner">🌙 저녁</option><option value="snack">🍪 간식</option><option value="etc">🧃 기타</option></select></label><label>뭐 먹었어?<input id="entryMenu" type="text" maxlength="80" placeholder="예: 한솥, 집밥, 샤브샤브" /></label></div><label>얼마 썼어?<div class="money-input"><input id="entryAmount" type="text" inputmode="text" autocomplete="off" placeholder="예: 5500+3900-1000" required /><span>원</span></div><small id="amountPreview" class="tiny muted">1원 단위 입력 · + / - 계산 가능</small></label><label>한마디<input id="entryNote" type="text" maxlength="120" placeholder="예: 오늘은 진짜 잘 참았다 😎" /></label><div class="dialog-actions"><button id="cancelEditBtn" class="ghost-btn hidden" type="button">수정 취소</button><button class="primary-btn" type="submit"><span id="saveBtnText">저장하기</span></button></div></form></dialog>
 
-  <dialog id="memberDialog" class="sheet-dialog small-dialog"><div class="dialog-head"><div><div class="eyebrow">THE CREW</div><h2>멤버 관리</h2></div><button class="close-btn" data-close="memberDialog">×</button></div><div id="memberSettings" class="member-settings"></div><form id="addMemberForm" class="add-member-form"><input id="newMemberEmoji" value="🍚" maxlength="4" aria-label="이모지" /><input id="newMemberName" placeholder="새 멤버 이름" maxlength="20" required /><button class="primary-btn compact" type="submit">추가</button></form><p class="tiny muted">친구 이름은 언제든 바꿀 수 있어. 삭제하면 그 친구의 기록도 함께 삭제돼.</p></dialog>
+  <dialog id="memberDialog" class="sheet-dialog small-dialog"><div class="dialog-head"><div><div class="eyebrow">THE CREW</div><h2>멤버 관리</h2></div><button class="close-btn" data-close="memberDialog">×</button></div><div id="memberSettings" class="member-settings"></div><form id="addMemberForm" class="add-member-form"><input id="newMemberEmoji" value="🍚" maxlength="12" aria-label="이모지" title="이름 앞 이모티콘" /><input id="newMemberName" placeholder="새 멤버 이름" maxlength="20" required /><button class="primary-btn compact" type="submit">추가</button></form><p class="tiny muted">왼쪽 칸에서 이름 앞 이모티콘도 자유롭게 바꿀 수 있어. 이름·이모지를 바꾸고 저장을 눌러줘. 삭제하면 그 친구의 기록도 함께 삭제돼.</p></dialog>
   <div id="toast" class="toast"></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>(() => {
   const SUPABASE_URL = "https://lficvilwbeqvttqcfhfg.supabase.co";
   const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_fYjaKivjpq8tmjV7oJ3j5w_lNLysz6R";
-  const APP_KEY = "geoji_escape_project_v1";
+  const APP_KEY = "geoji_escape_project_v1"; // 기존 데이터와 호환 유지
   const AUTH_STORAGE_KEY = "geoji_escape_shared_auth_v1";
   // 사용자가 입력하는 건 4자리 PIN뿐. Supabase 인증은 화면에 노출되지 않는 전용 공유 계정으로 처리한다.
   const ACCESS_PIN = "2019";
@@ -151,12 +151,30 @@ footer{text-align:center;color:#777;font-size:.78rem;padding-top:20px}
     logoutBtn: $("#logoutBtn"), syncText: $("#syncText"), syncDot: $("#syncDot"), monthTitle: $("#monthTitle"),
     groupTotal: $("#groupTotal"), groupSub: $("#groupSub"), savingKing: $("#savingKing"), savingKingSub: $("#savingKingSub"), dailyAverage: $("#dailyAverage"), zeroMealCount: $("#zeroMealCount"),
     memberCards: $("#memberCards"), calendarGrid: $("#calendarGrid"), recentList: $("#recentList"), dayDialog: $("#dayDialog"), dialogDateTitle: $("#dialogDateTitle"), dayEntries: $("#dayEntries"),
-    entryForm: $("#entryForm"), entryId: $("#entryId"), entryDate: $("#entryDate"), entryMember: $("#entryMember"), entryType: $("#entryType"), entryMenu: $("#entryMenu"), entryAmount: $("#entryAmount"), entryNote: $("#entryNote"),
+    entryForm: $("#entryForm"), entryId: $("#entryId"), entryDate: $("#entryDate"), entryMember: $("#entryMember"), entryType: $("#entryType"), entryMenu: $("#entryMenu"), entryAmount: $("#entryAmount"), amountPreview: $("#amountPreview"), entryNote: $("#entryNote"),
     formModeTitle: $("#formModeTitle"), saveBtnText: $("#saveBtnText"), cancelEditBtn: $("#cancelEditBtn"), memberDialog: $("#memberDialog"), memberSettings: $("#memberSettings"), addMemberForm: $("#addMemberForm"), toast: $("#toast")
   };
 
   function clone(v){ return JSON.parse(JSON.stringify(v)); }
   function money(n=0){ return `${fmt.format(Number(n)||0)}원`; }
+  function parseAmountExpression(raw){
+    const source=String(raw??"").trim();
+    if(!source) return {ok:false,error:"금액을 입력해줘!"};
+    const expr=source.replace(/[\s,₩원]/g,"");
+    if(!/^[+-]?\d+(?:[+-]\d+)*$/.test(expr)) return {ok:false,error:"숫자와 +, -만 사용할 수 있어."};
+    const terms=expr.match(/[+-]?\d+/g)||[];
+    const value=terms.reduce((sum,t)=>sum+Number(t),0);
+    if(!Number.isSafeInteger(value)) return {ok:false,error:"금액이 너무 커!"};
+    if(value<0) return {ok:false,error:"계산 결과는 0원 이상이어야 해."};
+    return {ok:true,value};
+  }
+  function updateAmountPreview(){
+    const result=parseAmountExpression(els.entryAmount?.value||"");
+    if(!els.amountPreview) return;
+    if(!els.entryAmount?.value.trim()){ els.amountPreview.textContent="1원 단위 입력 · + / - 계산 가능"; els.amountPreview.style.color=""; return; }
+    els.amountPreview.textContent=result.ok?`= ${money(result.value)}`:result.error;
+    els.amountPreview.style.color=result.ok?"#376f3e":"#c73838";
+  }
   function localDateISO(d){ const y=d.getFullYear(),m=String(d.getMonth()+1).padStart(2,"0"),day=String(d.getDate()).padStart(2,"0"); return `${y}-${m}-${day}`; }
   function parseISO(s){ const [y,m,d]=s.split("-").map(Number); return new Date(y,m-1,d); }
   function esc(v=""){ return String(v).replace(/[&<>'"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"}[c])); }
@@ -253,15 +271,15 @@ footer{text-align:center;color:#777;font-size:.78rem;padding-top:20px}
   }
   function renderMemberSelect(){const current=els.entryMember.value;els.entryMember.innerHTML=state.members.slice().sort((a,b)=>a.sort_order-b.sort_order).map(m=>`<option value="${m.id}">${esc(m.emoji||"🍚")} ${esc(m.name)}</option>`).join("");if(current&&state.members.some(m=>m.id===current))els.entryMember.value=current;}
   function renderMemberSettings(){
-    els.memberSettings.innerHTML=state.members.slice().sort((a,b)=>a.sort_order-b.sort_order).map(m=>`<div class="member-setting" data-id="${m.id}"><input class="emoji-input" value="${esc(m.emoji||"🍚")}" maxlength="4"><input class="name-input" value="${esc(m.name)}" maxlength="20"><button class="small-action save-member">저장</button><span></span><button class="small-action danger delete-member">삭제</button></div>`).join("")||'<div class="empty">멤버가 없어!</div>';
-    $$(".save-member").forEach(b=>b.addEventListener("click",()=>{const row=b.closest(".member-setting"),id=row.dataset.id,name=row.querySelector(".name-input").value.trim(),emoji=row.querySelector(".emoji-input").value.trim()||"🍚";if(!name)return toast("이름을 입력해줘!");mutateProject(p=>{const m=p.members.find(x=>x.id===id);if(m){m.name=name;m.emoji=emoji;}},"멤버 이름 저장 완료!");}));
+    els.memberSettings.innerHTML=state.members.slice().sort((a,b)=>a.sort_order-b.sort_order).map(m=>`<div class="member-setting" data-id="${m.id}"><input class="emoji-input" value="${esc(m.emoji||"🍚")}" maxlength="12" aria-label="${esc(m.name)} 이모티콘" title="이름 앞 이모티콘"><input class="name-input" value="${esc(m.name)}" maxlength="20" aria-label="멤버 이름"><button class="small-action save-member">저장</button><span></span><button class="small-action danger delete-member">삭제</button></div>`).join("")||'<div class="empty">멤버가 없어!</div>';
+    $$(".save-member").forEach(b=>b.addEventListener("click",()=>{const row=b.closest(".member-setting"),id=row.dataset.id,name=row.querySelector(".name-input").value.trim(),emoji=row.querySelector(".emoji-input").value.trim()||"🍚";if(!name)return toast("이름을 입력해줘!");mutateProject(p=>{const m=p.members.find(x=>x.id===id);if(m){m.name=name;m.emoji=emoji;}},"이름·이모티콘 저장 완료!");}));
     $$(".delete-member").forEach(b=>b.addEventListener("click",()=>{const row=b.closest(".member-setting"),id=row.dataset.id,m=memberOf(id);if(!confirm(`${m.name} 멤버와 모든 기록을 삭제할까?`))return;mutateProject(p=>{p.members=p.members.filter(x=>x.id!==id);p.entries=p.entries.filter(e=>e.member_id!==id);},"삭제했어.");}));
   }
   function openDay(iso){activeDate=iso;const d=parseISO(iso);els.dialogDateTitle.textContent=`${d.getFullYear()}년 ${d.getMonth()+1}월 ${d.getDate()}일`;resetEntryForm();els.entryDate.value=iso;renderDayEntries();els.dayDialog.showModal();}
   function renderDayEntries(){const day=state.entries.filter(e=>e.spent_on===activeDate).sort((a,b)=>String(a.meal_type).localeCompare(String(b.meal_type)));if(!day.length){els.dayEntries.innerHTML='<div class="empty">아직 아무것도 안 썼다! 🎉<br><span class="tiny">…혹은 아직 기록을 안 한 걸지도?</span></div>';return;}els.dayEntries.innerHTML=day.map(e=>{const m=memberOf(e.member_id);return `<div class="day-entry" data-id="${e.id}"><div class="emoji">${esc(m.emoji||"🍚")}</div><div class="entry-copy"><strong>${esc(m.name)} · ${mealEmoji[e.meal_type]||"🍴"} ${esc(e.menu||mealLabel[e.meal_type])}</strong><span>${esc(e.note||"")}</span></div><div class="entry-side"><strong>${money(e.amount)}</strong><div class="entry-actions"><button class="edit-entry">수정</button><button class="delete-entry danger">삭제</button></div></div></div>`;}).join("");$$(".edit-entry").forEach(b=>b.addEventListener("click",()=>editEntry(b.closest(".day-entry").dataset.id)));$$(".delete-entry").forEach(b=>b.addEventListener("click",()=>deleteEntry(b.closest(".day-entry").dataset.id)));}
-  function editEntry(id){const e=state.entries.find(x=>String(x.id)===String(id));if(!e)return;els.entryId.value=e.id;els.entryDate.value=e.spent_on;els.entryMember.value=e.member_id;els.entryType.value=e.meal_type;els.entryMenu.value=e.menu||"";els.entryAmount.value=e.amount||0;els.entryNote.value=e.note||"";els.formModeTitle.textContent="기록 수정";els.saveBtnText.textContent="수정 저장";els.cancelEditBtn.classList.remove("hidden");els.entryMenu.focus();}
+  function editEntry(id){const e=state.entries.find(x=>String(x.id)===String(id));if(!e)return;els.entryId.value=e.id;els.entryDate.value=e.spent_on;els.entryMember.value=e.member_id;els.entryType.value=e.meal_type;els.entryMenu.value=e.menu||"";els.entryAmount.value=String(e.amount??0);els.entryNote.value=e.note||"";els.formModeTitle.textContent="기록 수정";els.saveBtnText.textContent="수정 저장";els.cancelEditBtn.classList.remove("hidden");updateAmountPreview();els.entryDate.focus();}
   function deleteEntry(id){if(!confirm("이 기록을 삭제할까?"))return;mutateProject(p=>{p.entries=p.entries.filter(e=>String(e.id)!==String(id));},"기록 삭제 완료").then(()=>renderDayEntries());}
-  function resetEntryForm(){els.entryForm.reset();els.entryId.value="";els.entryDate.value=activeDate||localDateISO(new Date());els.entryAmount.value="";els.formModeTitle.textContent="기록 추가";els.saveBtnText.textContent="저장하기";els.cancelEditBtn.classList.add("hidden");renderMemberSelect();}
+  function resetEntryForm(){els.entryForm.reset();els.entryId.value="";els.entryDate.value=activeDate||localDateISO(new Date());els.entryAmount.value="";els.formModeTitle.textContent="기록 추가";els.saveBtnText.textContent="저장하기";els.cancelEditBtn.classList.add("hidden");renderMemberSelect();updateAmountPreview();}
 
   async function route(){
     if(!session){els.appView.classList.add("hidden");els.authView.classList.remove("hidden");if(pollTimer){clearInterval(pollTimer);pollTimer=null;}return;}
@@ -307,8 +325,28 @@ footer{text-align:center;color:#777;font-size:.78rem;padding-top:20px}
     $("#nextMonthBtn").addEventListener("click",()=>{selectedMonth=new Date(selectedMonth.getFullYear(),selectedMonth.getMonth()+1,1);renderAll();});
     $("#todayBtn").addEventListener("click",()=>{const n=new Date();selectedMonth=new Date(n.getFullYear(),n.getMonth(),1);renderAll();});
     $("#quickAddBtn").addEventListener("click",()=>openDay(localDateISO(new Date())));$("#manageMembersBtn").addEventListener("click",()=>els.memberDialog.showModal());$$('[data-close]').forEach(b=>b.addEventListener("click",()=>$("#"+b.dataset.close).close()));els.cancelEditBtn.addEventListener("click",resetEntryForm);
-    els.entryForm.addEventListener("submit",async e=>{e.preventDefault();if(!state.members.length)return toast("멤버를 먼저 추가해줘!");const id=els.entryId.value,payload={id:id||makeId(),member_id:els.entryMember.value,spent_on:els.entryDate.value,meal_type:els.entryType.value,menu:els.entryMenu.value.trim(),amount:Number(els.entryAmount.value||0),note:els.entryNote.value.trim(),created_at:new Date().toISOString(),updated_at:new Date().toISOString()};await mutateProject(p=>{if(id){const i=p.entries.findIndex(x=>String(x.id)===String(id));if(i>=0)payload.created_at=p.entries[i].created_at||payload.created_at,p.entries[i]=payload;else p.entries.push(payload);}else p.entries.push(payload);},id?"수정했어!":"기록 완료 💸");resetEntryForm();renderDayEntries();});
+    els.entryForm.addEventListener("submit",async e=>{
+      e.preventDefault();
+      if(!state.members.length) return toast("멤버를 먼저 추가해줘!");
+      const amountResult=parseAmountExpression(els.entryAmount.value);
+      if(!amountResult.ok){ toast(amountResult.error); els.entryAmount.focus(); return; }
+      const id=els.entryId.value;
+      const spentOn=els.entryDate.value;
+      if(!spentOn){ toast("날짜를 선택해줘!"); els.entryDate.focus(); return; }
+      const payload={id:id||makeId(),member_id:els.entryMember.value,spent_on:spentOn,meal_type:els.entryType.value,menu:els.entryMenu.value.trim(),amount:amountResult.value,note:els.entryNote.value.trim(),created_at:new Date().toISOString(),updated_at:new Date().toISOString()};
+      await mutateProject(p=>{if(id){const i=p.entries.findIndex(x=>String(x.id)===String(id));if(i>=0){payload.created_at=p.entries[i].created_at||payload.created_at;p.entries[i]=payload;}else p.entries.push(payload);}else p.entries.push(payload);},id?"수정했어!":"기록 완료 💸");
+      if(activeDate!==spentOn){
+        activeDate=spentOn;
+        const d=parseISO(spentOn);
+        selectedMonth=new Date(d.getFullYear(),d.getMonth(),1);
+        els.dialogDateTitle.textContent=`${d.getFullYear()}년 ${d.getMonth()+1}월 ${d.getDate()}일`;
+        renderAll();
+      }
+      resetEntryForm();
+      renderDayEntries();
+    });
     els.addMemberForm.addEventListener("submit",async e=>{e.preventDefault();const name=$("#newMemberName").value.trim(),emoji=$("#newMemberEmoji").value.trim()||"🍚";if(!name)return;await mutateProject(p=>{const next=Math.max(0,...p.members.map(m=>Number(m.sort_order||0)))+1;p.members.push({id:makeId(),name,emoji,sort_order:next});},"멤버 추가 완료!");$("#newMemberName").value="";});
+    els.entryAmount?.addEventListener("input",updateAmountPreview);
     const pinInput=$("#accessPin");
     pinInput?.addEventListener("input",()=>{ pinInput.value=pinInput.value.replace(/\D/g,"").slice(0,4); });
     window.addEventListener("focus",()=>{if(session)loadCloud({seedIfMissing:false,quiet:true});});
