@@ -136,7 +136,6 @@ main{display:flex;flex-direction:column}.month-bar{order:-100}[data-layout-secti
 
   <dialog id="memberProfileDialog" class="sheet-dialog"><div class="dialog-head"><div><div class="eyebrow">MEMBER SPENDING PROFILE</div><div id="profileHead" class="member-profile-head"></div></div><button class="close-btn" data-close="memberProfileDialog" aria-label="닫기">×</button></div><div id="profileSummary" class="profile-summary"></div><div class="profile-history-title"><h3>지출 내역</h3><span id="profileHistoryCount" class="tiny muted"></span></div><div id="profileHistory" class="profile-history"></div></dialog>
   <div id="toast" class="toast"></div>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>(() => {
   const ACCESS_PIN = "2019";
   const STATE_KEY = "geoji_escape_project_v1_local";
@@ -148,10 +147,10 @@ main{display:flex;flex-direction:column}.month-bar{order:-100}[data-layout-secti
   const CLOUD_TABLE_MEMBERS = "beggar_members";
   const CLOUD_TABLE_ENTRIES = "beggar_entries";
   const CLOUD_TABLE_UI = "beggar_ui_settings";
-  let cloudClient = null;
   let cloudReady = false;
   let cloudPulling = false;
   let cloudPollTimer = null;
+  let lastSyncError = "";
   const $ = (s) => document.querySelector(s);
   const $$ = (s) => [...document.querySelectorAll(s)];
   const fmt = new Intl.NumberFormat("ko-KR");
@@ -238,70 +237,104 @@ main{display:flex;flex-direction:column}.month-bar{order:-100}[data-layout-secti
   }
   function sameRow(a,b,keys){ return keys.every(k=>String(a?.[k]??"")===String(b?.[k]??"")); }
 
-  async function ensureCloudClient(){
-    if(cloudClient) return cloudClient;
-    if(!window.supabase) throw new Error("Supabase 라이브러리를 불러오지 못했어.");
-    cloudClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY,{auth:{persistSession:false,autoRefreshToken:false,detectSessionInUrl:false}});
-    return cloudClient;
+  function cloudErrorMessage(err){
+    const raw=String(err?.message||err||"");
+    if(/Failed to fetch|NetworkError|Load failed|fetch/i.test(raw)) return "네트워크에서 Supabase 접속이 차단됐어";
+    if(/permission|policy|row-level|401|403/i.test(raw)) return "Supabase 권한 설정을 확인해줘";
+    if(/relation|does not exist|404/i.test(raw)) return "Supabase 테이블 설정을 확인해줘";
+    return raw || "알 수 없는 연결 오류";
+  }
+
+  async function restRequest(table,{method="GET",query="",body,prefer=""}={}){
+    const url=`${SUPABASE_URL}/rest/v1/${table}${query?`?${query}`:""}`;
+    const headers={
+      "apikey":SUPABASE_PUBLISHABLE_KEY,
+      "Accept":"application/json"
+    };
+    if(body!==undefined) headers["Content-Type"]="application/json";
+    if(prefer) headers["Prefer"]=prefer;
+    let res;
+    try{
+      res=await fetch(url,{method,headers,body:body===undefined?undefined:JSON.stringify(body),cache:"no-store"});
+    }catch(err){
+      throw new Error(`Failed to fetch: ${err?.message||err}`);
+    }
+    const text=await res.text();
+    let data=null;
+    if(text){ try{data=JSON.parse(text);}catch(_){data=text;} }
+    if(!res.ok){
+      const detail=(data&&typeof data==="object")?([data.code,data.message,data.details,data.hint].filter(Boolean).join(" · ")):String(data||"");
+      throw new Error(`${res.status} ${detail||res.statusText}`.trim());
+    }
+    return data;
+  }
+
+  async function upsertRows(table,rows){
+    if(!rows || (Array.isArray(rows)&&!rows.length)) return;
+    await restRequest(table,{method:"POST",query:"on_conflict=id",body:rows,prefer:"resolution=merge-duplicates,return=minimal"});
+  }
+
+  async function deleteRowsById(table,ids){
+    for(const id of ids||[]){
+      await restRequest(table,{method:"DELETE",query:`id=eq.${encodeURIComponent(String(id))}`,prefer:"return=minimal"});
+    }
   }
 
   async function pushFullStateToCloud(project=state,settings=uiSettings){
-    const client=await ensureCloudClient();
     const members=project.members.map(memberRow);
     const entries=project.entries.map(entryRow);
-    if(members.length){ const {error}=await client.from(CLOUD_TABLE_MEMBERS).upsert(members,{onConflict:"id"}); if(error) throw error; }
-    if(entries.length){ const {error}=await client.from(CLOUD_TABLE_ENTRIES).upsert(entries,{onConflict:"id"}); if(error) throw error; }
-    const {error:uiErr}=await client.from(CLOUD_TABLE_UI).upsert({id:1,settings:normalizeUiSettings(settings),updated_at:new Date().toISOString()},{onConflict:"id"});
-    if(uiErr) throw uiErr;
+    if(members.length) await upsertRows(CLOUD_TABLE_MEMBERS,members);
+    if(entries.length) await upsertRows(CLOUD_TABLE_ENTRIES,entries);
+    await upsertRows(CLOUD_TABLE_UI,{id:1,settings:normalizeUiSettings(settings),updated_at:new Date().toISOString()});
   }
 
   async function pullCloud({initial=false,silent=false}={}){
     if(cloudPulling) return false;
     cloudPulling=true;
     try{
-      const client=await ensureCloudClient();
       if(!silent) setSync("","동기화 중...");
-      const [mRes,eRes,uRes]=await Promise.all([
-        client.from(CLOUD_TABLE_MEMBERS).select("id,name,emoji,sort_order,updated_at").order("sort_order"),
-        client.from(CLOUD_TABLE_ENTRIES).select("id,member_id,spent_on,meal_type,menu,amount,note,created_at,updated_at"),
-        client.from(CLOUD_TABLE_UI).select("settings,updated_at").eq("id",1).maybeSingle()
+      const [members,entries,uiRows]=await Promise.all([
+        restRequest(CLOUD_TABLE_MEMBERS,{query:"select=id,name,emoji,sort_order,updated_at&order=sort_order.asc"}),
+        restRequest(CLOUD_TABLE_ENTRIES,{query:"select=id,member_id,spent_on,meal_type,menu,amount,note,created_at,updated_at"}),
+        restRequest(CLOUD_TABLE_UI,{query:"select=settings,updated_at&id=eq.1&limit=1"})
       ]);
-      const firstError=mRes.error||eRes.error||uRes.error;
-      if(firstError) throw firstError;
-      const hasCloudData=(mRes.data?.length||0)>0 || (eRes.data?.length||0)>0;
+      const uiRow=Array.isArray(uiRows)?uiRows[0]:null;
+      const hasCloudData=(members?.length||0)>0 || (entries?.length||0)>0;
       const localBefore=clone(state);
       if(!hasCloudData){
         await pushFullStateToCloud(state,uiSettings);
         localStorage.setItem(CLOUD_MIGRATION_KEY,"yes");
       }else{
-        let cloudState=stateFromCloud(mRes.data||[],eRes.data||[]);
+        let cloudState=stateFromCloud(members||[],entries||[]);
         if(initial && localStorage.getItem(CLOUD_MIGRATION_KEY)!=="yes"){
           const merged=mergeLocalIntoCloudOnce(cloudState,localBefore);
           const addedAnything=merged.members.length!==cloudState.members.length || merged.entries.length!==cloudState.entries.length;
-          if(addedAnything){ await pushFullStateToCloud(merged,uRes.data?.settings||uiSettings); cloudState=merged; }
+          if(addedAnything){ await pushFullStateToCloud(merged,uiRow?.settings||uiSettings); cloudState=merged; }
           localStorage.setItem(CLOUD_MIGRATION_KEY,"yes");
         }
         state=cloudState;
         saveState();
-        if(uRes.data?.settings){ uiSettings=normalizeUiSettings(uRes.data.settings); saveUiSettings(); }
+        if(uiRow?.settings){ uiSettings=normalizeUiSettings(uiRow.settings); saveUiSettings(); }
         renderAll();
         if(activeDate && els.dayDialog?.open) renderDayEntries();
         if(profileMemberId && els.memberProfileDialog?.open) renderMemberProfile();
       }
       cloudReady=true;
-      setSync("ok","Supabase 동기화");
+      lastSyncError="";
+      setSync("ok","동기화 완료");
       return true;
     }catch(err){
-      console.error("Supabase pull error",err);
+      console.error("Supabase REST pull error",err);
       cloudReady=false;
+      const msg=cloudErrorMessage(err);
+      lastSyncError=`${msg}\n\n세부 오류: ${String(err?.message||err||"")}`;
       setSync("err","동기화 오류");
-      if(initial) toast("Supabase 연결을 확인해줘");
+      if(initial) toast(msg);
       return false;
     }finally{ cloudPulling=false; }
   }
 
   async function syncProjectDiff(before,after){
-    const client=await ensureCloudClient();
     setSync("","저장 중...");
     const oldMembers=new Map(before.members.map(x=>[String(x.id),x]));
     const oldEntries=new Map(before.entries.map(x=>[String(x.id),x]));
@@ -309,22 +342,21 @@ main{display:flex;flex-direction:column}.month-bar{order:-100}[data-layout-secti
     const changedEntries=after.entries.filter(e=>!oldEntries.has(String(e.id)) || !sameRow(oldEntries.get(String(e.id)),e,["member_id","spent_on","meal_type","menu","amount","note","updated_at"])).map(entryRow);
     const deletedEntryIds=before.entries.filter(e=>!after.entries.some(n=>String(n.id)===String(e.id))).map(e=>String(e.id));
     const deletedMemberIds=before.members.filter(m=>!after.members.some(n=>String(n.id)===String(m.id))).map(m=>String(m.id));
-    if(changedMembers.length){ const {error}=await client.from(CLOUD_TABLE_MEMBERS).upsert(changedMembers,{onConflict:"id"}); if(error) throw error; }
-    if(changedEntries.length){ const {error}=await client.from(CLOUD_TABLE_ENTRIES).upsert(changedEntries,{onConflict:"id"}); if(error) throw error; }
-    if(deletedEntryIds.length){ const {error}=await client.from(CLOUD_TABLE_ENTRIES).delete().in("id",deletedEntryIds); if(error) throw error; }
-    if(deletedMemberIds.length){ const {error}=await client.from(CLOUD_TABLE_MEMBERS).delete().in("id",deletedMemberIds); if(error) throw error; }
+    if(changedMembers.length) await upsertRows(CLOUD_TABLE_MEMBERS,changedMembers);
+    if(changedEntries.length) await upsertRows(CLOUD_TABLE_ENTRIES,changedEntries);
+    if(deletedEntryIds.length) await deleteRowsById(CLOUD_TABLE_ENTRIES,deletedEntryIds);
+    if(deletedMemberIds.length) await deleteRowsById(CLOUD_TABLE_MEMBERS,deletedMemberIds);
     cloudReady=true;
-    setSync("ok","Supabase 동기화");
+    lastSyncError="";
+    setSync("ok","동기화 완료");
   }
 
   async function syncUiSettings(){
     try{
-      const client=await ensureCloudClient();
       setSync("","설정 저장 중...");
-      const {error}=await client.from(CLOUD_TABLE_UI).upsert({id:1,settings:normalizeUiSettings(uiSettings),updated_at:new Date().toISOString()},{onConflict:"id"});
-      if(error) throw error;
-      cloudReady=true;setSync("ok","Supabase 동기화");
-    }catch(err){console.error(err);setSync("err","설정 동기화 오류");toast("설정은 이 브라우저에 저장됐지만 Supabase 동기화에 실패했어.");}
+      await upsertRows(CLOUD_TABLE_UI,{id:1,settings:normalizeUiSettings(uiSettings),updated_at:new Date().toISOString()});
+      cloudReady=true;lastSyncError="";setSync("ok","동기화 완료");
+    }catch(err){console.error(err);lastSyncError=`${cloudErrorMessage(err)}\n\n세부 오류: ${String(err?.message||err||"")}`;setSync("err","설정 동기화 오류");toast(cloudErrorMessage(err));}
   }
 
   async function mutateProject(mutator,successMessage="저장했어!"){
@@ -335,7 +367,7 @@ main{display:flex;flex-direction:column}.month-bar{order:-100}[data-layout-secti
     state=normalizeProject(next);
     saveState();
     renderAll();
-    try{ await syncProjectDiff(before,state); }catch(err){ console.error("Supabase save error",err); setSync("err","저장 오류"); toast("이 브라우저에는 저장됐지만 Supabase 저장에 실패했어."); }
+    try{ await syncProjectDiff(before,state); }catch(err){ console.error("Supabase save error",err); lastSyncError=`${cloudErrorMessage(err)}\n\n세부 오류: ${String(err?.message||err||"")}`; setSync("err","저장 오류"); toast("이 브라우저에는 저장됐지만 Supabase 저장에 실패했어."); }
     if(successMessage)toast(successMessage);
   }
 
@@ -412,11 +444,17 @@ main{display:flex;flex-direction:column}.month-bar{order:-100}[data-layout-secti
   function route(){const granted=localStorage.getItem(ACCESS_KEY)==="yes";$("#adminView").classList.add("hidden");if(!granted){els.appView.classList.add("hidden");els.authView.classList.remove("hidden");return;}els.authView.classList.add("hidden");els.appView.classList.remove("hidden");state=loadState();uiSettings=loadUiSettings();renderAll();setSync("","Supabase 연결 중");pullCloud({initial:true});}
 
   function exportBackup(){const payload={app:"거지탈출 프로젝트",version:1,exported_at:new Date().toISOString(),state,uiSettings};const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download=`거지탈출_백업_${localDateISO(new Date())}.json`;document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);toast("백업 파일을 만들었어!");}
-  async function importBackup(file){try{const parsed=JSON.parse(await file.text());const nextState=normalizeProject(parsed.state||parsed.project||parsed);const nextUi=normalizeUiSettings(parsed.uiSettings||parsed.ui||{});if(!confirm("현재 기록과 디자인 설정을 백업 내용으로 교체하고 Supabase에도 저장할까?"))return;state=nextState;uiSettings=nextUi;saveState();saveUiSettings();renderAll();renderAdminControls();await pushFullStateToCloud(state,uiSettings);setSync("ok","Supabase 동기화");toast("백업 불러오기 + 동기화 완료!");}catch(err){console.error(err);toast("백업 파일을 읽거나 동기화하지 못했어 😭");}}
+  async function importBackup(file){try{const parsed=JSON.parse(await file.text());const nextState=normalizeProject(parsed.state||parsed.project||parsed);const nextUi=normalizeUiSettings(parsed.uiSettings||parsed.ui||{});if(!confirm("현재 기록과 디자인 설정을 백업 내용으로 교체하고 Supabase에도 저장할까?"))return;state=nextState;uiSettings=nextUi;saveState();saveUiSettings();renderAll();renderAdminControls();await pushFullStateToCloud(state,uiSettings);setSync("ok","동기화 완료");toast("백업 불러오기 + 동기화 완료!");}catch(err){console.error(err);toast("백업 파일을 읽거나 동기화하지 못했어 😭");}}
 
   function bindEvents(){
     els.loginForm.addEventListener("submit",e=>{e.preventDefault();const pin=$("#accessPin").value.trim();if(pin!==ACCESS_PIN)return authMsg("비밀번호가 틀렸어 👀",true);localStorage.setItem(ACCESS_KEY,"yes");authMsg("입장 완료 ✨");route();});
     els.logoutBtn.addEventListener("click",()=>{localStorage.removeItem(ACCESS_KEY);route();});
+    const syncPill=document.querySelector(".sync-pill");
+    syncPill?.addEventListener("click",()=>{
+      if(lastSyncError) alert(`동기화 오류 내용\n\n${lastSyncError}\n\n이 내용을 캡처해서 보내주면 원인을 바로 찾을 수 있어.`);
+      else alert(cloudReady?"Supabase 동기화가 정상적으로 연결되어 있어 ✅":"아직 Supabase 연결을 확인 중이야.");
+    });
+    if(syncPill) syncPill.title="동기화 상태를 눌러 자세한 내용을 확인할 수 있어";
     $("#prevMonthBtn").addEventListener("click",()=>{selectedMonth=new Date(selectedMonth.getFullYear(),selectedMonth.getMonth()-1,1);renderAll();});
     $("#nextMonthBtn").addEventListener("click",()=>{selectedMonth=new Date(selectedMonth.getFullYear(),selectedMonth.getMonth()+1,1);renderAll();});
     $("#todayBtn").addEventListener("click",()=>{const n=new Date();selectedMonth=new Date(n.getFullYear(),n.getMonth(),1);renderAll();});
