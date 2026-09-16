@@ -100,7 +100,7 @@ main{display:flex;flex-direction:column}.month-bar{order:-100}[data-layout-secti
         <p class="subtitle">먹은 건 기록하고, 통장은 지키고.</p>
       </div>
       <div class="top-actions">
-        <span class="sync-pill"><i id="syncDot" class="sync-dot ok"></i><span id="syncText">이 브라우저 저장</span></span>
+        <span class="sync-pill"><i id="syncDot" class="sync-dot ok"></i><span id="syncText">Supabase 연결 중</span></span>
         <button id="adminBtn" class="ghost-btn">⚙ 관리자</button>
         <button id="manageMembersBtn" class="ghost-btn">👥 멤버</button>
         <button id="logoutBtn" class="ghost-btn">로그아웃</button>
@@ -124,10 +124,10 @@ main{display:flex;flex-direction:column}.month-bar{order:-100}[data-layout-secti
       <article class="admin-card"><h2>상단 요약 카드 색상</h2><p>절약왕·지출왕·평균식비·0원 식사 카드의 배경색.</p><div class="admin-color-grid"><label class="admin-color-field"><span>👑 절약왕</span><input id="colorSaving" type="color"></label><label class="admin-color-field"><span>🔥 지출왕</span><input id="colorSpending" type="color"></label><label class="admin-color-field"><span>📆 하루 평균</span><input id="colorAverage" type="color"></label><label class="admin-color-field"><span>✨ 0원 식사</span><input id="colorZero" type="color"></label></div></article>
       <article class="admin-card"><h2>영역 색상</h2><p>버튼 강조색과 각 영역 카드의 기본색.</p><div class="admin-color-grid"><label class="admin-color-field"><span>강조색</span><input id="colorAccent" type="color"></label><label class="admin-color-field"><span>멤버 카드</span><input id="colorMember" type="color"></label><label class="admin-color-field"><span>달력</span><input id="colorCalendar" type="color"></label><label class="admin-color-field"><span>최근 지출</span><input id="colorRecent" type="color"></label></div></article>
       <article class="admin-card" style="grid-column:1/-1"><h2>화면 위치 · 표시 여부</h2><p>숫자가 작을수록 위에 표시돼. 같은 숫자면 현재 순서를 유지해.</p><div id="adminSectionList" class="admin-setting-list"></div></article>
-      <article class="admin-card" style="grid-column:1/-1"><h2>데이터 백업</h2><p>GitHub Pages만 사용하므로 다른 컴퓨터로 옮길 때는 백업 파일을 사용해줘.</p><div class="admin-actions" style="justify-content:flex-start;margin-top:0"><button id="exportDataBtn" class="ghost-btn">백업 내보내기</button><button id="importDataBtn" class="ghost-btn">백업 불러오기</button><input id="importDataFile" type="file" accept="application/json,.json" class="hidden"></div></article>
+      <article class="admin-card" style="grid-column:1/-1"><h2>데이터 백업</h2><p>Supabase에 자동 저장돼서 다른 컴퓨터·휴대폰에서도 같은 기록을 불러와. 백업은 혹시 모를 상황을 위한 보조 기능이야.</p><div class="admin-actions" style="justify-content:flex-start;margin-top:0"><button id="exportDataBtn" class="ghost-btn">백업 내보내기</button><button id="importDataBtn" class="ghost-btn">백업 불러오기</button><input id="importDataFile" type="file" accept="application/json,.json" class="hidden"></div></article>
     </div>
     <div class="admin-actions"><button id="resetUiBtn" class="ghost-btn">기본 디자인으로</button><button id="saveUiBtn" class="primary-btn">설정 저장</button></div>
-    <div class="admin-note"><b>GitHub Pages 단독 모드</b>라서 기록과 디자인 설정은 현재 브라우저의 저장공간(localStorage)에 보관돼. 다른 컴퓨터와 자동 동기화되지는 않아. 다른 기기로 옮길 땐 위의 백업 내보내기/불러오기를 사용하면 돼.</div>
+    <div class="admin-note"><b>Supabase 동기화 모드</b>야. 기록·멤버·디자인 설정은 Supabase에 저장되고, 현재 브라우저에는 빠른 로딩을 위한 캐시만 남겨. 다른 컴퓨터에서도 같은 홈페이지를 열면 자동으로 같은 데이터를 불러와.</div>
   </section>
 
   <dialog id="dayDialog" class="sheet-dialog"><div class="dialog-head"><div><div class="eyebrow">DAILY DAMAGE</div><h2 id="dialogDateTitle"></h2></div><button class="close-btn" data-close="dayDialog">×</button></div><div id="dayEntries" class="day-entries"></div><div class="form-divider"><span id="formModeTitle">기록 추가</span></div><form id="entryForm" class="entry-form"><input id="entryId" type="hidden" /><div class="form-two"><label>날짜<input id="entryDate" type="date" required /></label><label>누가 먹었어?<select id="entryMember" required></select></label></div><div class="form-two"><label>구분<select id="entryType" required><option value="lunch">🍱 점심</option><option value="dinner">🌙 저녁</option><option value="snack">🍪 간식</option><option value="etc">🧃 기타</option></select></label><label>뭐 먹었어?<input id="entryMenu" type="text" maxlength="80" placeholder="예: 한솥, 집밥, 샤브샤브" /></label></div><label>얼마 썼어?<div class="money-input"><input id="entryAmount" type="text" inputmode="text" autocomplete="off" placeholder="예: 5500+3900-1000" required /><span>원</span></div><small id="amountPreview" class="tiny muted">1원 단위 입력 · + / - 계산 가능</small></label><label>한마디<input id="entryNote" type="text" maxlength="120" placeholder="예: 오늘은 진짜 잘 참았다 😎" /></label><div class="dialog-actions"><button id="cancelEditBtn" class="ghost-btn hidden" type="button">수정 취소</button><button class="primary-btn" type="submit"><span id="saveBtnText">저장하기</span></button></div></form></dialog>
@@ -136,11 +136,22 @@ main{display:flex;flex-direction:column}.month-bar{order:-100}[data-layout-secti
 
   <dialog id="memberProfileDialog" class="sheet-dialog"><div class="dialog-head"><div><div class="eyebrow">MEMBER SPENDING PROFILE</div><div id="profileHead" class="member-profile-head"></div></div><button class="close-btn" data-close="memberProfileDialog" aria-label="닫기">×</button></div><div id="profileSummary" class="profile-summary"></div><div class="profile-history-title"><h3>지출 내역</h3><span id="profileHistoryCount" class="tiny muted"></span></div><div id="profileHistory" class="profile-history"></div></dialog>
   <div id="toast" class="toast"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>(() => {
   const ACCESS_PIN = "2019";
   const STATE_KEY = "geoji_escape_project_v1_local";
   const UI_KEY = "geoji_escape_ui_v1_local";
   const ACCESS_KEY = "geoji_escape_access_granted_v1";
+  const CLOUD_MIGRATION_KEY = "geoji_escape_cloud_migrated_v1";
+  const SUPABASE_URL = "https://lficvilwbeqvttqcfhfg.supabase.co";
+  const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_fYjaKivjpq8tmjV7oJ3j5w_lNLysz6R";
+  const CLOUD_TABLE_MEMBERS = "beggar_members";
+  const CLOUD_TABLE_ENTRIES = "beggar_entries";
+  const CLOUD_TABLE_UI = "beggar_ui_settings";
+  let cloudClient = null;
+  let cloudReady = false;
+  let cloudPulling = false;
+  let cloudPollTimer = null;
   const $ = (s) => document.querySelector(s);
   const $$ = (s) => [...document.querySelectorAll(s)];
   const fmt = new Intl.NumberFormat("ko-KR");
@@ -210,10 +221,123 @@ main{display:flex;flex-direction:column}.month-bar{order:-100}[data-layout-secti
   }
   function normalizeUiSettings(raw){const d=defaultUiSettings(),r=(raw&&typeof raw==="object")?raw:{};return {heroColors:{...d.heroColors,...(r.heroColors||{})},colors:{...d.colors,...(r.colors||{})},sections:Object.fromEntries(Object.keys(d.sections).map(k=>[k,{...d.sections[k],...(r.sections?.[k]||{})}]))};}
   function loadState(){ try{return normalizeProject(JSON.parse(localStorage.getItem(STATE_KEY)||"null")||freshState());}catch(_){return freshState();} }
-  function saveState(){ state.updated_at=new Date().toISOString(); localStorage.setItem(STATE_KEY,JSON.stringify(state)); setSync("ok","이 브라우저 저장"); }
+  function saveState(){ state.updated_at=new Date().toISOString(); localStorage.setItem(STATE_KEY,JSON.stringify(state)); }
   function loadUiSettings(){ try{return normalizeUiSettings(JSON.parse(localStorage.getItem(UI_KEY)||"null")||defaultUiSettings());}catch(_){return defaultUiSettings();} }
   function saveUiSettings(){ localStorage.setItem(UI_KEY,JSON.stringify(uiSettings)); }
-  async function mutateProject(mutator,successMessage="저장했어!"){ const next=clone(state); await mutator(next); state=normalizeProject(next); saveState(); renderAll(); if(successMessage)toast(successMessage); }
+
+  function memberRow(m){ return {id:String(m.id),name:String(m.name||""),emoji:String(m.emoji||"🍚"),sort_order:Number(m.sort_order||999),updated_at:new Date().toISOString()}; }
+  function entryRow(e){ return {id:String(e.id),member_id:String(e.member_id),spent_on:e.spent_on,meal_type:e.meal_type||"etc",menu:e.menu||"",amount:Number(e.amount||0),note:e.note||"",created_at:e.created_at||new Date().toISOString(),updated_at:e.updated_at||new Date().toISOString()}; }
+  function stateFromCloud(members,entries){ return normalizeProject({version:1,updated_at:new Date().toISOString(),members:(members||[]).map(m=>({id:m.id,name:m.name,emoji:m.emoji,sort_order:m.sort_order})),entries:(entries||[]).map(e=>({id:e.id,member_id:e.member_id,spent_on:e.spent_on,meal_type:e.meal_type,menu:e.menu,amount:Number(e.amount||0),note:e.note,created_at:e.created_at,updated_at:e.updated_at}))}); }
+  function mergeLocalIntoCloudOnce(cloudState,localState){
+    const merged=clone(cloudState);
+    const memberIds=new Set(merged.members.map(m=>String(m.id)));
+    for(const m of localState.members||[]){ if(!memberIds.has(String(m.id))){ merged.members.push(clone(m)); memberIds.add(String(m.id)); } }
+    const entryIds=new Set(merged.entries.map(e=>String(e.id)));
+    for(const e of localState.entries||[]){ if(!entryIds.has(String(e.id))){ merged.entries.push(clone(e)); entryIds.add(String(e.id)); } }
+    return normalizeProject(merged);
+  }
+  function sameRow(a,b,keys){ return keys.every(k=>String(a?.[k]??"")===String(b?.[k]??"")); }
+
+  async function ensureCloudClient(){
+    if(cloudClient) return cloudClient;
+    if(!window.supabase) throw new Error("Supabase 라이브러리를 불러오지 못했어.");
+    cloudClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY,{auth:{persistSession:false,autoRefreshToken:false,detectSessionInUrl:false}});
+    return cloudClient;
+  }
+
+  async function pushFullStateToCloud(project=state,settings=uiSettings){
+    const client=await ensureCloudClient();
+    const members=project.members.map(memberRow);
+    const entries=project.entries.map(entryRow);
+    if(members.length){ const {error}=await client.from(CLOUD_TABLE_MEMBERS).upsert(members,{onConflict:"id"}); if(error) throw error; }
+    if(entries.length){ const {error}=await client.from(CLOUD_TABLE_ENTRIES).upsert(entries,{onConflict:"id"}); if(error) throw error; }
+    const {error:uiErr}=await client.from(CLOUD_TABLE_UI).upsert({id:1,settings:normalizeUiSettings(settings),updated_at:new Date().toISOString()},{onConflict:"id"});
+    if(uiErr) throw uiErr;
+  }
+
+  async function pullCloud({initial=false,silent=false}={}){
+    if(cloudPulling) return false;
+    cloudPulling=true;
+    try{
+      const client=await ensureCloudClient();
+      if(!silent) setSync("","동기화 중...");
+      const [mRes,eRes,uRes]=await Promise.all([
+        client.from(CLOUD_TABLE_MEMBERS).select("id,name,emoji,sort_order,updated_at").order("sort_order"),
+        client.from(CLOUD_TABLE_ENTRIES).select("id,member_id,spent_on,meal_type,menu,amount,note,created_at,updated_at"),
+        client.from(CLOUD_TABLE_UI).select("settings,updated_at").eq("id",1).maybeSingle()
+      ]);
+      const firstError=mRes.error||eRes.error||uRes.error;
+      if(firstError) throw firstError;
+      const hasCloudData=(mRes.data?.length||0)>0 || (eRes.data?.length||0)>0;
+      const localBefore=clone(state);
+      if(!hasCloudData){
+        await pushFullStateToCloud(state,uiSettings);
+        localStorage.setItem(CLOUD_MIGRATION_KEY,"yes");
+      }else{
+        let cloudState=stateFromCloud(mRes.data||[],eRes.data||[]);
+        if(initial && localStorage.getItem(CLOUD_MIGRATION_KEY)!=="yes"){
+          const merged=mergeLocalIntoCloudOnce(cloudState,localBefore);
+          const addedAnything=merged.members.length!==cloudState.members.length || merged.entries.length!==cloudState.entries.length;
+          if(addedAnything){ await pushFullStateToCloud(merged,uRes.data?.settings||uiSettings); cloudState=merged; }
+          localStorage.setItem(CLOUD_MIGRATION_KEY,"yes");
+        }
+        state=cloudState;
+        saveState();
+        if(uRes.data?.settings){ uiSettings=normalizeUiSettings(uRes.data.settings); saveUiSettings(); }
+        renderAll();
+        if(activeDate && els.dayDialog?.open) renderDayEntries();
+        if(profileMemberId && els.memberProfileDialog?.open) renderMemberProfile();
+      }
+      cloudReady=true;
+      setSync("ok","Supabase 동기화");
+      return true;
+    }catch(err){
+      console.error("Supabase pull error",err);
+      cloudReady=false;
+      setSync("err","동기화 오류");
+      if(initial) toast("Supabase 연결을 확인해줘");
+      return false;
+    }finally{ cloudPulling=false; }
+  }
+
+  async function syncProjectDiff(before,after){
+    const client=await ensureCloudClient();
+    setSync("","저장 중...");
+    const oldMembers=new Map(before.members.map(x=>[String(x.id),x]));
+    const oldEntries=new Map(before.entries.map(x=>[String(x.id),x]));
+    const changedMembers=after.members.filter(m=>!oldMembers.has(String(m.id)) || !sameRow(oldMembers.get(String(m.id)),m,["name","emoji","sort_order"])).map(memberRow);
+    const changedEntries=after.entries.filter(e=>!oldEntries.has(String(e.id)) || !sameRow(oldEntries.get(String(e.id)),e,["member_id","spent_on","meal_type","menu","amount","note","updated_at"])).map(entryRow);
+    const deletedEntryIds=before.entries.filter(e=>!after.entries.some(n=>String(n.id)===String(e.id))).map(e=>String(e.id));
+    const deletedMemberIds=before.members.filter(m=>!after.members.some(n=>String(n.id)===String(m.id))).map(m=>String(m.id));
+    if(changedMembers.length){ const {error}=await client.from(CLOUD_TABLE_MEMBERS).upsert(changedMembers,{onConflict:"id"}); if(error) throw error; }
+    if(changedEntries.length){ const {error}=await client.from(CLOUD_TABLE_ENTRIES).upsert(changedEntries,{onConflict:"id"}); if(error) throw error; }
+    if(deletedEntryIds.length){ const {error}=await client.from(CLOUD_TABLE_ENTRIES).delete().in("id",deletedEntryIds); if(error) throw error; }
+    if(deletedMemberIds.length){ const {error}=await client.from(CLOUD_TABLE_MEMBERS).delete().in("id",deletedMemberIds); if(error) throw error; }
+    cloudReady=true;
+    setSync("ok","Supabase 동기화");
+  }
+
+  async function syncUiSettings(){
+    try{
+      const client=await ensureCloudClient();
+      setSync("","설정 저장 중...");
+      const {error}=await client.from(CLOUD_TABLE_UI).upsert({id:1,settings:normalizeUiSettings(uiSettings),updated_at:new Date().toISOString()},{onConflict:"id"});
+      if(error) throw error;
+      cloudReady=true;setSync("ok","Supabase 동기화");
+    }catch(err){console.error(err);setSync("err","설정 동기화 오류");toast("설정은 이 브라우저에 저장됐지만 Supabase 동기화에 실패했어.");}
+  }
+
+  async function mutateProject(mutator,successMessage="저장했어!"){
+    if(cloudReady) await pullCloud({silent:true});
+    const before=clone(state);
+    const next=clone(state);
+    await mutator(next);
+    state=normalizeProject(next);
+    saveState();
+    renderAll();
+    try{ await syncProjectDiff(before,state); }catch(err){ console.error("Supabase save error",err); setSync("err","저장 오류"); toast("이 브라우저에는 저장됐지만 Supabase 저장에 실패했어."); }
+    if(successMessage)toast(successMessage);
+  }
 
   function applyUiSettings(){const s=normalizeUiSettings(uiSettings);uiSettings=s;document.documentElement.style.setProperty("--accent",s.colors.accent);document.documentElement.style.setProperty("--member-card-bg",s.colors.memberCard);document.documentElement.style.setProperty("--calendar-bg",s.colors.calendar);document.documentElement.style.setProperty("--recent-bg",s.colors.recent);const hero=$('[data-layout-section="summary"]');if(hero){const cards=hero.querySelectorAll(".hero-card"),cols=[s.heroColors.saving,s.heroColors.spending,s.heroColors.average,s.heroColors.zero];cards.forEach((c,i)=>{if(cols[i])c.style.background=cols[i];});}$$('[data-layout-section]').forEach(el=>{const k=el.dataset.layoutSection,c=s.sections[k]||{order:99,visible:true};el.style.order=String(Number(c.order)||99);el.classList.toggle("layout-hidden",c.visible===false);});}
   function renderAdminControls(){const s=normalizeUiSettings(uiSettings),vals={colorSaving:s.heroColors.saving,colorSpending:s.heroColors.spending,colorAverage:s.heroColors.average,colorZero:s.heroColors.zero,colorAccent:s.colors.accent,colorMember:s.colors.memberCard,colorCalendar:s.colors.calendar,colorRecent:s.colors.recent};Object.entries(vals).forEach(([id,v])=>{const el=$("#"+id);if(el)el.value=v;});const labels={summary:"상단 요약",members:"멤버 지출현황",calendar:"월간 밥값 달력",recent:"최근 지출"};const wrap=$("#adminSectionList");if(!wrap)return;wrap.innerHTML=Object.keys(labels).map(k=>{const c=s.sections[k];return `<div class="admin-setting-row" data-section-key="${k}"><label>${labels[k]}</label><select class="order-select">${[1,2,3,4].map(n=>`<option value="${n}" ${Number(c.order)===n?"selected":""}>${n}번째</option>`).join("")}</select><label class="visibility"><input class="visible-check" type="checkbox" ${c.visible!==false?"checked":""}> 표시</label></div>`}).join("");}
@@ -285,10 +409,10 @@ main{display:flex;flex-direction:column}.month-bar{order:-100}[data-layout-secti
   function resetEntryForm(){els.entryForm.reset();els.entryId.value="";els.entryDate.value=activeDate||localDateISO(new Date());els.entryAmount.value="";els.formModeTitle.textContent="기록 추가";els.saveBtnText.textContent="저장하기";els.cancelEditBtn.classList.add("hidden");renderMemberSelect();updateAmountPreview();}
 
   function authMsg(text,isError=false){els.authMessage.textContent=text;els.authMessage.style.color=isError?"#c73838":"#376f3e";}
-  function route(){const granted=localStorage.getItem(ACCESS_KEY)==="yes";$("#adminView").classList.add("hidden");if(!granted){els.appView.classList.add("hidden");els.authView.classList.remove("hidden");return;}els.authView.classList.add("hidden");els.appView.classList.remove("hidden");state=loadState();uiSettings=loadUiSettings();renderAll();setSync("ok","이 브라우저 저장");}
+  function route(){const granted=localStorage.getItem(ACCESS_KEY)==="yes";$("#adminView").classList.add("hidden");if(!granted){els.appView.classList.add("hidden");els.authView.classList.remove("hidden");return;}els.authView.classList.add("hidden");els.appView.classList.remove("hidden");state=loadState();uiSettings=loadUiSettings();renderAll();setSync("","Supabase 연결 중");pullCloud({initial:true});}
 
   function exportBackup(){const payload={app:"거지탈출 프로젝트",version:1,exported_at:new Date().toISOString(),state,uiSettings};const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download=`거지탈출_백업_${localDateISO(new Date())}.json`;document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);toast("백업 파일을 만들었어!");}
-  async function importBackup(file){try{const parsed=JSON.parse(await file.text());const nextState=normalizeProject(parsed.state||parsed.project||parsed);const nextUi=normalizeUiSettings(parsed.uiSettings||parsed.ui||{});if(!confirm("현재 브라우저의 기록과 디자인 설정을 백업 내용으로 교체할까?"))return;state=nextState;uiSettings=nextUi;saveState();saveUiSettings();renderAll();renderAdminControls();toast("백업 불러오기 완료!");}catch(err){console.error(err);toast("백업 파일을 읽지 못했어 😭");}}
+  async function importBackup(file){try{const parsed=JSON.parse(await file.text());const nextState=normalizeProject(parsed.state||parsed.project||parsed);const nextUi=normalizeUiSettings(parsed.uiSettings||parsed.ui||{});if(!confirm("현재 기록과 디자인 설정을 백업 내용으로 교체하고 Supabase에도 저장할까?"))return;state=nextState;uiSettings=nextUi;saveState();saveUiSettings();renderAll();renderAdminControls();await pushFullStateToCloud(state,uiSettings);setSync("ok","Supabase 동기화");toast("백업 불러오기 + 동기화 완료!");}catch(err){console.error(err);toast("백업 파일을 읽거나 동기화하지 못했어 😭");}}
 
   function bindEvents(){
     els.loginForm.addEventListener("submit",e=>{e.preventDefault();const pin=$("#accessPin").value.trim();if(pin!==ACCESS_PIN)return authMsg("비밀번호가 틀렸어 👀",true);localStorage.setItem(ACCESS_KEY,"yes");authMsg("입장 완료 ✨");route();});
@@ -305,8 +429,8 @@ main{display:flex;flex-direction:column}.month-bar{order:-100}[data-layout-secti
     els.cancelEditBtn.addEventListener("click",resetEntryForm);
     els.entryForm.addEventListener("submit",async e=>{e.preventDefault();if(!state.members.length)return toast("멤버를 먼저 추가해줘!");const amountResult=parseAmountExpression(els.entryAmount.value);if(!amountResult.ok){toast(amountResult.error);els.entryAmount.focus();return;}const id=els.entryId.value,spentOn=els.entryDate.value;if(!spentOn){toast("날짜를 선택해줘!");els.entryDate.focus();return;}const payload={id:id||makeId(),member_id:els.entryMember.value,spent_on:spentOn,meal_type:els.entryType.value,menu:els.entryMenu.value.trim(),amount:amountResult.value,note:els.entryNote.value.trim(),created_at:new Date().toISOString(),updated_at:new Date().toISOString()};await mutateProject(p=>{if(id){const i=p.entries.findIndex(x=>String(x.id)===String(id));if(i>=0){payload.created_at=p.entries[i].created_at||payload.created_at;p.entries[i]=payload;}else p.entries.push(payload);}else p.entries.push(payload);},id?"수정했어!":"기록 완료 💸");if(activeDate!==spentOn){activeDate=spentOn;const d=parseISO(spentOn);selectedMonth=new Date(d.getFullYear(),d.getMonth(),1);els.dialogDateTitle.textContent=`${d.getFullYear()}년 ${d.getMonth()+1}월 ${d.getDate()}일`;renderAll();}resetEntryForm();renderDayEntries();});
     els.addMemberForm.addEventListener("submit",async e=>{e.preventDefault();const name=$("#newMemberName").value.trim(),emoji=$("#newMemberEmoji").value.trim()||"🍚";if(!name)return;await mutateProject(p=>{const next=Math.max(0,...p.members.map(m=>Number(m.sort_order||0)))+1;p.members.push({id:makeId(),name,emoji,sort_order:next});},"멤버 추가 완료!");$("#newMemberName").value="";});
-    $("#saveUiBtn").addEventListener("click",()=>{uiSettings=normalizeUiSettings(collectAdminSettings());saveUiSettings();applyUiSettings();renderAdminControls();toast("디자인 설정 저장 완료!");});
-    $("#resetUiBtn").addEventListener("click",()=>{uiSettings=defaultUiSettings();saveUiSettings();renderAdminControls();applyUiSettings();toast("기본 디자인으로 돌렸어!");});
+    $("#saveUiBtn").addEventListener("click",async()=>{uiSettings=normalizeUiSettings(collectAdminSettings());saveUiSettings();applyUiSettings();renderAdminControls();await syncUiSettings();toast("디자인 설정 저장 완료!");});
+    $("#resetUiBtn").addEventListener("click",async()=>{uiSettings=defaultUiSettings();saveUiSettings();renderAdminControls();applyUiSettings();await syncUiSettings();toast("기본 디자인으로 돌렸어!");});
     $("#exportDataBtn").addEventListener("click",exportBackup);
     $("#importDataBtn").addEventListener("click",()=>$("#importDataFile").click());
     $("#importDataFile").addEventListener("change",e=>{const file=e.target.files?.[0];if(file)importBackup(file);e.target.value="";});
@@ -314,6 +438,10 @@ main{display:flex;flex-direction:column}.month-bar{order:-100}[data-layout-secti
     const pinInput=$("#accessPin");pinInput?.addEventListener("input",()=>{pinInput.value=pinInput.value.replace(/\D/g,"").slice(0,4);});
     $$('#adminView input[type="color"], #adminView select, #adminView input[type="checkbox"]').forEach(el=>el.addEventListener("input",()=>{try{uiSettings=normalizeUiSettings(collectAdminSettings());applyUiSettings();}catch(_){}}));
     window.addEventListener("storage",e=>{if(e.key===STATE_KEY||e.key===UI_KEY){state=loadState();uiSettings=loadUiSettings();renderAll();}});
+    window.addEventListener("focus",()=>{if(localStorage.getItem(ACCESS_KEY)==="yes")pullCloud({silent:true});});
+    document.addEventListener("visibilitychange",()=>{if(!document.hidden&&localStorage.getItem(ACCESS_KEY)==="yes")pullCloud({silent:true});});
+    clearInterval(cloudPollTimer);
+    cloudPollTimer=setInterval(()=>{if(localStorage.getItem(ACCESS_KEY)==="yes"&&!document.hidden)pullCloud({silent:true});},15000);
   }
 
   function init(){bindEvents();route();}
